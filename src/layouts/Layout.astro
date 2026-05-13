@@ -1,6 +1,7 @@
 ---
 import '../styles/global.css';
 import { SITE, NAV, SOCIALS } from '../config';
+import ThemeToggle from '../components/ThemeToggle.astro';
 
 interface Props {
 	title?: string;
@@ -17,6 +18,8 @@ function isCurrent(href: string): boolean {
 	if (normalized === '/') return currentPath === '/';
 	return currentPath === normalized || currentPath.startsWith(normalized + '/');
 }
+
+const visibleSocials = SOCIALS.filter((s) => s.label !== 'rss');
 ---
 
 <!doctype html>
@@ -44,33 +47,71 @@ function isCurrent(href: string): boolean {
 		<meta name="twitter:title" content={fullTitle} />
 		<meta name="twitter:description" content={description} />
 
-		<meta name="theme-color" content="#0d0d0d" />
+		<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
+		<meta name="theme-color" content="#0a0a0a" media="(prefers-color-scheme: dark)" />
+
+		{/*
+		  Inline, blocking theme-init script.
+		  Runs before paint so the correct theme is applied on the very first
+		  frame — no flash of light theme when the user prefers dark, and no
+		  flash of system theme when they have explicitly chosen one.
+		*/}
+		<script is:inline>
+			(function () {
+				try {
+					var pref = localStorage.getItem('theme');
+					if (pref !== 'light' && pref !== 'dark' && pref !== 'system') pref = 'system';
+					var resolved =
+						pref === 'system'
+							? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light')
+							: pref;
+					document.documentElement.dataset.themePref = pref;
+					document.documentElement.dataset.theme = resolved;
+				} catch (e) {
+					document.documentElement.dataset.themePref = 'system';
+					document.documentElement.dataset.theme = 'light';
+				}
+			})();
+		</script>
 	</head>
 	<body>
-		<div class="page">
-			<header class="site-header">
-				<a class="brand" href="/">{SITE.brand}</a>
+		<header class="site-header">
+			<div class="site-header-inner">
+				<a class="brand" href="/" aria-label={`${SITE.author} — home`}>
+					<span class="brand-full">{SITE.author}</span>
+				</a>
 				<nav class="site-nav" aria-label="Primary">
 					{NAV.map((item) => (
 						<a
+							class="nav-link"
 							href={item.href}
 							aria-current={isCurrent(item.href) ? 'page' : undefined}
 						>{item.label}</a>
 					))}
+					<ThemeToggle />
 				</nav>
-			</header>
+			</div>
+		</header>
 
+		<div class="page">
 			<main>
 				<slot />
 			</main>
 
 			<footer class="site-footer">
 				<span>&copy; {new Date().getFullYear()} {SITE.author}</span>
-				<div class="socials">
-					{SOCIALS.map((s) => (
-						<a href={s.href} rel={s.external ? 'me noopener' : undefined} target={s.external ? '_blank' : undefined}>{s.label}</a>
-					))}
-				</div>
+				{visibleSocials.map((s, i) => (
+					<>
+						<span class="sep">·</span>
+						<a
+							href={s.href}
+							target={s.external ? '_blank' : undefined}
+							rel={s.external ? 'me noopener' : undefined}
+						>{s.label}</a>
+					</>
+				))}
+				<span class="sep">·</span>
+				<a href="/rss.xml">rss</a>
 			</footer>
 		</div>
 	</body>

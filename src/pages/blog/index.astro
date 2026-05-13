@@ -6,36 +6,67 @@ const posts = (await getCollection('blog'))
 	.filter((p) => import.meta.env.PROD ? !p.data.draft : true)
 	.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 
-const fmt = (d: Date) =>
-	d.toISOString().slice(0, 10);
+const fmt = (d: Date) => d.toISOString().slice(0, 10);
 ---
 
-<Layout title="blog" description="Writing by Berk Kirik.">
-	<section>
-		<h1 class="prompt">ls blog/</h1>
-		<p class="muted">
-			Notes, write-ups, and occasional rants. Subscribe via <a href="/rss.xml">RSS</a>.
+<Layout title="blog" description="Writing by Berk Kırık.">
+	<div class="stack">
+		<span class="eyebrow">01 — blog</span>
+		<h1>Writing</h1>
+		<p>
+			Short notes from production: LLMs, RAG, agents, the things that break and why.
+			Subscribe via <a href="/rss.xml">RSS</a>.
 		</p>
-	</section>
+	</div>
 
-	<section>
+	<section aria-label="Posts">
 		{posts.length === 0 ? (
-			<p class="muted">No posts yet.</p>
+			<p style="color: var(--fg-muted); margin-top: 80px;">No posts yet.</p>
 		) : (
-			<ul class="list">
+			<ul class="post-list">
 				{posts.map((post) => (
-					<li class="list-item">
-						<span class="meta">{fmt(post.data.pubDate)}</span>
-						<a class="title" href={`/blog/${post.id}/`}>{post.data.title}</a>
-						{post.data.description && <p>{post.data.description}</p>}
-						{post.data.tags.length > 0 && (
-							<ul class="tags">
-								{post.data.tags.map((t) => <li>{t}</li>)}
-							</ul>
-						)}
+					<li class="post-item">
+						<time class="meta" datetime={post.data.pubDate.toISOString()}>{fmt(post.data.pubDate)}</time>
+						<a class="post-title" href={`/blog/${post.id}/`}>{post.data.title}</a>
 					</li>
 				))}
 			</ul>
 		)}
 	</section>
 </Layout>
+
+<style>
+	.post-list {
+		margin-top: 24px;
+	}
+
+	.post-item {
+		display: grid;
+		grid-template-columns: 110px 1fr;
+		gap: 1rem;
+		padding: 16px 0;
+		align-items: baseline;
+	}
+
+	.post-item + .post-item {
+		border-top: 1px solid var(--rule);
+	}
+
+	.post-item .meta {
+		color: var(--fg-subtle);
+		font-family: var(--font-mono);
+		font-size: 13px;
+		letter-spacing: 0.04em;
+	}
+
+	.post-title {
+		font-size: 16px;
+	}
+
+	@media (max-width: 480px) {
+		.post-item {
+			grid-template-columns: 1fr;
+			gap: 4px;
+		}
+	}
+</style>

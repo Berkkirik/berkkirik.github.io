@@ -1,5 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import RainbowRule from '../../components/RainbowRule.astro';
 import { getCollection, render } from 'astro:content';
 import type { CollectionEntry } from 'astro:content';
 
@@ -25,53 +26,28 @@ const fmt = (d: Date) => d.toISOString().slice(0, 10);
 
 <Layout title={post.data.title} description={post.data.description}>
 	<article>
-		<header class="stack stack-sm" style="margin-bottom: 1.5rem;">
-			<p class="muted" style="font-size: 0.8125rem;">
-				<a href="/blog/" style="color: var(--fg-muted);">&larr; blog</a>
-			</p>
+		<header class="stack stack-sm">
+			<span class="eyebrow">
+				<time datetime={post.data.pubDate.toISOString()}>{fmt(post.data.pubDate)}</time>
+				{post.data.updatedDate && (
+					<span> · updated {fmt(post.data.updatedDate)}</span>
+				)}
+				{post.data.tags.length > 0 && (
+					<span> · {post.data.tags.map((t) => `#${t}`).join(' ')}</span>
+				)}
+				{post.data.draft && <span> · DRAFT</span>}
+			</span>
 			<h1>{post.data.title}</h1>
-			<p class="muted" style="font-size: 0.8125rem;">
-				<span>published {fmt(post.data.pubDate)}</span>
-				{post.data.updatedDate && <span> · updated {fmt(post.data.updatedDate)}</span>}
-				{post.data.draft && <span> · <span class="accent">DRAFT</span></span>}
-			</p>
-			{post.data.tags.length > 0 && (
-				<ul class="tags">
-					{post.data.tags.map((t) => <li>{t}</li>)}
-				</ul>
-			)}
 		</header>
 
-		<div class="prose">
+		<div class="prose" style="margin-top: 32px;">
 			<Content />
 		</div>
 
-		<footer class="muted" style="margin-top: 2.5rem; font-size: 0.8125rem;">
-			<a href="/blog/" style="color: var(--fg-muted);">&larr; back to blog</a>
-		</footer>
+		<RainbowRule />
+
+		<p class="small" style="text-transform: none; letter-spacing: 0.02em;">
+			<a href="/blog/">← back to blog</a>
+		</p>
 	</article>
 </Layout>
-
-<style>
-	.prose :global(p),
-	.prose :global(ul),
-	.prose :global(ol) {
-		margin-bottom: 1rem;
-	}
-
-	.prose :global(h2),
-	.prose :global(h3) {
-		margin-top: 2rem;
-		margin-bottom: 0.75rem;
-	}
-
-	.prose :global(pre) {
-		margin: 1rem 0;
-	}
-
-	.prose :global(img) {
-		max-width: 100%;
-		height: auto;
-		border-radius: 2px;
-	}
-</style>

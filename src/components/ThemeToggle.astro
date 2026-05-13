@@ -1,0 +1,64 @@
+---
+/**
+ * Three-state theme toggle: system → light → dark → system.
+ *
+ * - The user's *preference* (system | light | dark) is stored in
+ *   localStorage and reflected as `data-theme-pref` on <html>.
+ * - The *resolved* theme (light | dark) is reflected as `data-theme`
+ *   on <html>, which the CSS reads via [data-theme='dark'].
+ * - An inline blocking script in <head> (in Layout.astro) sets both
+ *   attributes before paint, so there's no flash of the wrong theme.
+ *
+ * The button below only handles cycling and listening for changes to
+ * `prefers-color-scheme` when the user is in 'system' mode.
+ */
+---
+
+<button
+	type="button"
+	class="theme-toggle"
+	data-theme-toggle
+	aria-label="Change color theme"
+	title="Change theme"
+>
+	<span class="icon icon-auto" aria-hidden="true">⌥</span>
+	<span class="icon icon-light" aria-hidden="true">☀</span>
+	<span class="icon icon-dark" aria-hidden="true">☾</span>
+	<span class="icon icon-auto-fallback" aria-hidden="true">⌥</span>
+	<span class="sr-only">Change theme</span>
+</button>
+
+<script is:inline>
+	(function () {
+		const html = document.documentElement;
+		const btn = document.querySelector('[data-theme-toggle]');
+		if (!btn) return;
+
+		const mq = window.matchMedia('(prefers-color-scheme: dark)');
+
+		function resolve(pref) {
+			return pref === 'system' ? (mq.matches ? 'dark' : 'light') : pref;
+		}
+
+		function apply(pref) {
+			html.dataset.themePref = pref;
+			html.dataset.theme = resolve(pref);
+		}
+
+		btn.addEventListener('click', () => {
+			const cur = html.dataset.themePref || 'system';
+			const next = cur === 'system' ? 'light' : cur === 'light' ? 'dark' : 'system';
+			try {
+				localStorage.setItem('theme', next);
+			} catch (e) {
+				/* ignore — private mode, storage full, etc. */
+			}
+			apply(next);
+		});
+
+		// Re-resolve when system preference changes, but only if user is in 'system' mode.
+		mq.addEventListener('change', () => {
+			if ((html.dataset.themePref || 'system') === 'system') apply('system');
+		});
+	})();
+</script>

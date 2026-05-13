@@ -1,64 +1,36 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import { SITE, SOCIALS } from '../config';
+import RainbowBars from '../components/RainbowBars.astro';
+import { SITE } from '../config';
 ---
 
 <Layout title="about" description={SITE.description}>
-	<section>
-		<h1 class="prompt">whoami</h1>
-		<p>
-			I'm <strong>Berk Kırık</strong>, a Senior AI Engineer.<span class="cursor" aria-hidden="true"></span>
+	<div class="stack">
+		<RainbowBars />
+
+		<h1 class="display">Berk Kırık</h1>
+
+		<p class="small" style="text-transform: none; letter-spacing: 0.02em; color: var(--fg-muted);">
+			Senior AI Engineer · Ankara, Türkiye
 		</p>
+
 		<p>
 			I build production ML systems — LLM fine-tuning, RAG pipelines, multi-tenant
 			NER, agentic AI, and the Kubernetes infra underneath. Currently at <a
 				href="https://www.etiya.com/"
 				target="_blank"
-				rel="noopener">Etiya</a>. Previously: ML/backend lead in fintech
-			(<a href="https://im-par.de/" target="_blank" rel="noopener">Im-Par</a>, Frankfurt) and
-			healthcare AI (<a href="https://www.tigahealth.com/" target="_blank" rel="noopener">Tiga</a>, Ankara).
+				rel="noopener">Etiya</a>; previously at <a href="https://im-par.de/" target="_blank" rel="noopener">Im-Par</a>
+			(Frankfurt) and <a href="https://www.tigahealth.com/" target="_blank" rel="noopener">Tiga</a>
+			(Ankara). MSc Computer Engineering at Ankara University; co-author on a
+			<a href="https://www.nature.com/articles/s41598-025-34095-z" target="_blank" rel="noopener">Nature Scientific Reports paper</a>
+			on Kolmogorov–Arnold networks.
 		</p>
+
 		<p>
-			MSc Computer Engineering at Ankara University. Co-author on a
-			<a href="https://www.nature.com/articles/s41598-025-34095-z" target="_blank" rel="noopener">
-				Nature Scientific Reports paper
-			</a>
-			on Kolmogorov–Arnold networks. I write here occasionally about ML systems,
-			LLMs, and whatever I'm currently nerd-sniped by.
+			<a href="/projects/">projects</a> ·
+			<a href="/blog/">blog</a> ·
+			<a href="/resume/">resume</a> ·
+			<a href="mailto:berk.kirik@outlook.com">email</a>
 		</p>
-	</section>
-
-	<section>
-		<h2 class="prompt">cat now.txt</h2>
-		<ul class="stack stack-sm">
-			<li><span class="dim">&rarr;</span> Senior AI Engineer at <strong>Etiya</strong> — LoRA fine-tuning, agentic AI (LangGraph/CrewAI), enterprise RAG, guardrails.</li>
-			<li><span class="dim">&rarr;</span> MSc Computer Engineering at <strong>Ankara University</strong> (started Feb 2026).</li>
-			<li><span class="dim">&rarr;</span> Based in Ankara, Türkiye.</li>
-		</ul>
-	</section>
-
-	<section>
-		<h2 class="prompt">ls links/</h2>
-		<ul class="stack stack-sm">
-			{SOCIALS.filter((s) => s.label !== 'rss').map((s) => (
-				<li>
-					<span class="dim">&rarr;</span>{' '}
-					<a href={s.href} target={s.external ? '_blank' : undefined} rel={s.external ? 'me noopener' : undefined}>{s.label}</a>
-				</li>
-			))}
-			<li>
-				<span class="dim">&rarr;</span>{' '}
-				<a href={SITE.resumePath} target="_blank" rel="noopener">resume (pdf)</a>
-			</li>
-		</ul>
-	</section>
-
-	<section>
-		<h2 class="prompt">cd</h2>
-		<ul class="stack stack-sm">
-			<li><span class="dim">&rarr;</span> <a href="/projects/">/projects</a> — selected work</li>
-			<li><span class="dim">&rarr;</span> <a href="/blog/">/blog</a> — writing</li>
-			<li><span class="dim">&rarr;</span> <a href="/resume/">/resume</a> — full CV</li>
-		</ul>
-	</section>
+	</div>
 </Layout>

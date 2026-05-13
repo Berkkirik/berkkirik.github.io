@@ -1,5 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import RainbowRule from '../components/RainbowRule.astro';
 import { SITE, SOCIALS } from '../config';
 
 interface Job {
@@ -150,57 +151,53 @@ const languages = [
 	{ name: 'English', level: 'B2 / C1 (reading)' },
 	{ name: 'German', level: 'A1–A2' },
 ];
+
+const visibleSocials = SOCIALS.filter((s) => s.label !== 'rss');
 ---
 
 <Layout
 	title="resume"
 	description="Resume of Berk Kırık — Senior AI Engineer. Experience, education, skills, and publications."
 >
-	<section>
-		<h1 class="prompt">cat resume.md</h1>
+	<div class="stack">
+		<span class="eyebrow">resume</span>
+		<h1>Berk Kırık</h1>
 		<p>
-			<strong>Berk Kırık</strong> — Senior AI Engineer. 5+ years building production
-			ML in microservices: LLMs, RAG, agentic AI, NER, and the Kubernetes infra
-			underneath. Background in fintech and healthcare AI.
+			Senior AI Engineer. Five years building production ML in microservices —
+			LLMs, RAG, agentic AI, NER, and the Kubernetes infra underneath. Background
+			in fintech and healthcare AI. Based in Ankara, Türkiye.
 		</p>
-		<p>
+		<p class="small" style="text-transform: none; letter-spacing: 0.02em; color: var(--fg-muted);">
 			Full PDF:{' '}
-			<a href={SITE.resumePath} target="_blank" rel="noopener">
-				download {SITE.resumePath.split('/').pop()}
-			</a>
-			<span class="muted"> · the PDF is the source of truth.</span>
-		</p>
-	</section>
-
-	<section id="contact">
-		<h2 class="prompt">contact</h2>
-		<ul class="stack stack-sm">
-			{SOCIALS.filter((s) => s.label !== 'rss').map((s) => (
-				<li>
-					<span class="dim">&rarr;</span>{' '}
-					<a href={s.href} target={s.external ? '_blank' : undefined} rel={s.external ? 'me noopener' : undefined}>{s.label}</a>
-				</li>
+			<a href={SITE.resumePath} target="_blank" rel="noopener">{SITE.resumePath.split('/').pop()}</a>
+			{' · '}
+			{visibleSocials.map((s, i) => (
+				<>
+					{i > 0 && ' · '}
+					<a
+						href={s.href}
+						target={s.external ? '_blank' : undefined}
+						rel={s.external ? 'me noopener' : undefined}
+					>{s.label}</a>
+				</>
 			))}
-			<li><span class="dim">&rarr;</span> <span class="muted">Ankara, Türkiye</span></li>
-		</ul>
-	</section>
+		</p>
+	</div>
 
 	<section id="experience">
-		<h2 class="prompt">experience</h2>
-		<ul class="list">
+		<span class="eyebrow">01 — experience</span>
+		<ul style="margin-top: 24px;">
 			{experience.map((job) => (
-				<li class="list-item">
+				<li class="entry">
 					<span class="meta">{job.period} · {job.location}</span>
-					<span class="title">
+					<h2>
 						{job.role} ·{' '}
 						{job.url ? (
 							<a href={job.url} target="_blank" rel="noopener">{job.company}</a>
-						) : (
-							<span class="muted">{job.company}</span>
-						)}
-					</span>
-					{job.summary && <p class="muted">{job.summary}</p>}
-					<ul>
+						) : job.company}
+					</h2>
+					{job.summary && <p style="color: var(--fg-muted);">{job.summary}</p>}
+					<ul class="bulleted">
 						{job.bullets.map((b) => <li>{b}</li>)}
 					</ul>
 				</li>
@@ -209,78 +206,82 @@ const languages = [
 	</section>
 
 	<section id="education">
-		<h2 class="prompt">education</h2>
-		<ul class="list">
+		<span class="eyebrow">02 — education</span>
+		<ul style="margin-top: 24px;">
 			{education.map((e) => (
-				<li class="list-item">
+				<li class="entry">
 					<span class="meta">{e.period} · {e.location}</span>
-					<span class="title">
+					<h2>
 						{e.degree} ·{' '}
 						{e.url ? (
 							<a href={e.url} target="_blank" rel="noopener">{e.school}</a>
-						) : (
-							<span class="muted">{e.school}</span>
-						)}
-					</span>
+						) : e.school}
+					</h2>
 				</li>
 			))}
 		</ul>
 	</section>
 
+	<RainbowRule />
+
 	<section id="skills">
-		<h2 class="prompt">skills</h2>
-		<ul class="stack stack-sm">
+		<span class="eyebrow">03 — skills</span>
+		<ul style="margin-top: 24px;">
 			{Object.entries(skills).map(([group, items]) => (
-				<li>
-					<strong>{group}:</strong>{' '}
-					<span class="muted">{items.join(' · ')}</span>
+				<li class="entry">
+					<h2>{group}</h2>
+					<p style="color: var(--fg-muted);">{items.join(' · ')}</p>
 				</li>
 			))}
 		</ul>
 	</section>
 
 	<section id="publications">
-		<h2 class="prompt">publications</h2>
-		<ul class="list">
+		<span class="eyebrow">04 — publications</span>
+		<ul style="margin-top: 24px;">
 			{publications.map((p) => (
-				<li class="list-item">
+				<li class="entry">
 					<span class="meta">{p.year} · {p.venue}</span>
-					<span class="title">
+					<h2>
 						{p.link ? (
 							<a href={p.link} target="_blank" rel="noopener">{p.title}</a>
 						) : p.title}
-					</span>
-					<p class="muted">{p.authors}</p>
+					</h2>
+					<p style="color: var(--fg-muted);">{p.authors}</p>
 				</li>
 			))}
 		</ul>
-		<p class="muted">
+		<p style="color: var(--fg-muted); margin-top: 24px;">
 			Full record on{' '}
 			<a href="https://orcid.org/0009-0004-5045-3048" target="_blank" rel="noopener">ORCID</a>.
 		</p>
 	</section>
 
 	<section id="certifications">
-		<h2 class="prompt">certifications</h2>
-		<ul class="stack stack-sm">
+		<span class="eyebrow">05 — certifications</span>
+		<ul style="margin-top: 24px;">
 			{certifications.map((c) => (
-				<li>
-					<strong>
+				<li class="entry">
+					<span class="meta">{c.date && c.date !== '—' ? c.date : ''}</span>
+					<h2>
 						{c.link ? (
 							<a href={c.link} target="_blank" rel="noopener">{c.title}</a>
 						) : c.title}
-					</strong>{' '}
-					<span class="muted">— {c.issuer}{c.date && c.date !== '—' ? ` · ${c.date}` : ''}</span>
+					</h2>
+					<p style="color: var(--fg-muted);">{c.issuer}</p>
 				</li>
 			))}
 		</ul>
 	</section>
 
 	<section id="languages">
-		<h2 class="prompt">languages</h2>
-		<ul class="stack stack-sm">
+		<span class="eyebrow">06 — languages</span>
+		<ul style="margin-top: 24px;">
 			{languages.map((l) => (
-				<li><strong>{l.name}:</strong> <span class="muted">{l.level}</span></li>
+				<li class="entry">
+					<h2>{l.name}</h2>
+					<p style="color: var(--fg-muted);">{l.level}</p>
+				</li>
 			))}
 		</ul>
 	</section>

@@ -3,46 +3,122 @@ import Layout from '../layouts/Layout.astro';
 
 interface Project {
 	title: string;
+	attribution?: string;
 	description: string;
+	highlights?: string[];
 	tags?: string[];
 	repo?: string;
 	demo?: string;
-	year?: number;
+	link?: { label: string; href: string };
+	year?: string;
 }
 
-// Edit this list to add/remove projects. Most recent first.
+// Selected work, newest first. Mostly proprietary builds — descriptions
+// avoid confidential details. Personal/OSS work lives on GitHub.
 const projects: Project[] = [
 	{
-		title: 'Personal Website',
+		title: 'Enterprise RAG System',
+		attribution: 'Built at Etiya',
+		year: '2025–',
 		description:
-			'This site you are reading. Built with Astro, hosted on GitHub Pages, designed as a terminal/monospace aesthetic.',
-		tags: ['astro', 'css', 'github-pages'],
-		repo: 'https://github.com/berkkirik/berkkirik.github.io',
-		year: 2026,
+			'Production RAG pipeline over 500K+ documents with hybrid search (vector + BM25), advanced chunking, HyDE query rewriting, cross-encoder re-ranking, and RAGAS evaluation.',
+		highlights: [
+			'92% recall@10, 45% reduction in hallucinations',
+			'Sub-3s end-to-end response time',
+			'20+ supported file formats',
+		],
+		tags: ['rag', 'llm', 'hybrid-search', 'faiss', 'ragas'],
 	},
 	{
-		title: 'Project Two (placeholder)',
+		title: 'Agentic AI Platform',
+		attribution: 'Built at Etiya',
+		year: '2025–',
 		description:
-			'Short, plain-language description of what this project does and why it exists. Two sentences max.',
-		tags: ['python', 'ml'],
-		repo: 'https://github.com/berkkirik/example',
-		demo: 'https://example.com',
-		year: 2025,
+			'Multi-agent orchestration with LangGraph and CrewAI using ReAct and Plan-and-Execute patterns across 25+ tools, with episodic and knowledge-graph memory, LangSmith tracing, and self-healing pipelines.',
+		highlights: [
+			'99.2% task completion across autonomous workflows',
+			'Researcher/analyst/writer/critic collaboration model',
+			'Integrated guardrails for safe autonomous operation',
+		],
+		tags: ['agents', 'langgraph', 'crewai', 'langsmith', 'react'],
 	},
 	{
-		title: 'Project Three (placeholder)',
-		description: 'Another placeholder. Replace with a real project.',
-		tags: ['typescript'],
-		repo: 'https://github.com/berkkirik/example-two',
-		year: 2024,
+		title: 'LLM Guardrail System',
+		attribution: 'Built at Etiya',
+		year: '2025–',
+		description:
+			'Multi-layer guardrails (Guardrails AI + NeMo Guardrails + custom layers) with PII detection, SHAP-based explainability, Redis caching, and Prometheus/Grafana observability — on a microservices architecture.',
+		highlights: [
+			'89.2% blocking of harmful outputs',
+			'97% PII detection across 15+ categories',
+			'<50ms cached response times, 5K+ concurrent requests',
+		],
+		tags: ['guardrails', 'llm-safety', 'pii', 'shap', 'redis'],
+	},
+	{
+		title: 'Multi-Tenant NER Platform',
+		attribution: 'Built at Etiya',
+		year: '2025–',
+		description:
+			'Scalable Named Entity Recognition service serving multiple enterprise clients with tenant-specific isolation and automated model selection based on SLAs.',
+		highlights: [
+			'Sub-200ms inference latency',
+			'Per-tenant isolation and model routing',
+		],
+		tags: ['nlp', 'ner', 'multi-tenant', 'inference'],
+	},
+	{
+		title: 'Code-Generation LLM Fine-tuning',
+		attribution: 'Built at Etiya',
+		year: '2025',
+		description:
+			'LoRA-based fine-tuning of large code models on Hugging Face for domain-specific code completion, with A/B testing for seamless adapter swapping.',
+		highlights: [
+			'+40% domain-specific completion accuracy',
+			'−90% training cost (only 0.1% of params trained)',
+		],
+		tags: ['llm', 'fine-tuning', 'lora', 'huggingface', 'pytorch'],
+	},
+	{
+		title: 'ISO 20022 / SWIFT MT-MX NLP Pipeline',
+		attribution: 'Built at Im-Par (Frankfurt)',
+		year: '2023–2025',
+		description:
+			'NLP pipelines in Python to validate and automatically generate compliant financial messages (ISO 20022, SWIFT MT/MX), reducing manual intervention in regulated workflows.',
+		tags: ['nlp', 'fintech', 'compliance', 'iso-20022', 'swift'],
+	},
+	{
+		title: 'Graph-Based Fraud Detection',
+		attribution: 'Built at Im-Par (Frankfurt)',
+		year: '2023–2025',
+		description:
+			'Graph systems over large-scale financial datasets using Neo4j and GraphQL, combining link prediction, clustering, and anomaly detection with traditional data mining (Pandas, Spark) for real-time fraud signals.',
+		tags: ['graphs', 'neo4j', 'fraud-detection', 'anomaly-detection', 'spark'],
+	},
+	{
+		title: 'Healthcare Activity Recognition',
+		attribution: 'Built at Tiga (Ankara)',
+		year: '2021–2023',
+		description:
+			'Edge-to-cloud activity-recognition pipeline: ESP-32 + Raspberry Pi sensors, preprocessing with PCA/FFT/LDA, and an ensemble of classical ML (RF, SVM, XGBoost) and CNN models deployed for on-device inference.',
+		tags: ['healthcare', 'edge-ml', 'sensor-fusion', 'cnn', 'xgboost'],
 	},
 ];
 ---
 
-<Layout title="projects" description="Things Berk Kirik has built.">
+<Layout title="projects" description="Selected production ML and engineering work by Berk Kırık.">
 	<section>
 		<h1 class="prompt">ls projects/</h1>
-		<p class="muted">A non-exhaustive list of things I've built. Newest first.</p>
+		<p>
+			Selected work, newest first. Most of this is proprietary, so descriptions
+			are intentionally light on internal detail.
+		</p>
+		<p class="muted">
+			Open-source side projects live on{' '}
+			<a href="https://github.com/Berkkirik" target="_blank" rel="noopener">GitHub</a>;
+			peer-reviewed work is on the <a href="/resume/#publications">resume</a> and
+			<a href="https://orcid.org/0009-0004-5045-3048" target="_blank" rel="noopener">ORCID</a>.
+		</p>
 	</section>
 
 	<section>
@@ -50,14 +126,28 @@ const projects: Project[] = [
 			{projects.map((p) => (
 				<li class="list-item">
 					<span class="meta">
-						{p.year ? `${p.year} · ` : ''}{p.tags?.length ? p.tags.map((t) => `#${t}`).join(' ') : ''}
+						{p.year ? `${p.year}` : ''}
+						{p.attribution ? ` · ${p.attribution}` : ''}
 					</span>
 					<span class="title">{p.title}</span>
 					<p>{p.description}</p>
-					<div class="stack" style="flex-direction: row; gap: 1rem; font-size: 0.8125rem;">
-						{p.repo && <a href={p.repo} target="_blank" rel="noopener">repo &rarr;</a>}
-						{p.demo && <a href={p.demo} target="_blank" rel="noopener">demo &rarr;</a>}
-					</div>
+					{p.highlights && p.highlights.length > 0 && (
+						<ul>
+							{p.highlights.map((h) => <li>{h}</li>)}
+						</ul>
+					)}
+					{p.tags && p.tags.length > 0 && (
+						<ul class="tags">
+							{p.tags.map((t) => <li>{t}</li>)}
+						</ul>
+					)}
+					{(p.repo || p.demo || p.link) && (
+						<div class="stack" style="flex-direction: row; gap: 1rem; font-size: 0.8125rem;">
+							{p.repo && <a href={p.repo} target="_blank" rel="noopener">repo &rarr;</a>}
+							{p.demo && <a href={p.demo} target="_blank" rel="noopener">demo &rarr;</a>}
+							{p.link && <a href={p.link.href} target="_blank" rel="noopener">{p.link.label} &rarr;</a>}
+						</div>
+					)}
 				</li>
 			))}
 		</ul>

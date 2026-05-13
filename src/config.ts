@@ -4,11 +4,11 @@
  */
 
 export const SITE = {
-	title: 'berk kirik',
+	title: 'Berk Kırık',
 	brand: 'berk@kirik:~$',
-	author: 'Berk Kirik',
+	author: 'Berk Kırık',
 	description:
-		'Personal site of Berk Kirik — software engineer. Projects, writing, and resume.',
+		'Senior AI Engineer building production ML systems — LLM fine-tuning, RAG, NER, agentic AI, and ML infrastructure on Kubernetes.',
 	url: 'https://berkkirik.github.io',
 	// Path to the resume PDF inside /public.
 	resumePath: '/berk_kirik_cv.pdf',
@@ -26,8 +26,9 @@ export const SOCIALS: ReadonlyArray<{
 	href: string;
 	external?: boolean;
 }> = [
-	{ label: 'github', href: 'https://github.com/berkkirik', external: true },
-	{ label: 'linkedin', href: 'https://www.linkedin.com/in/berkkirik', external: true },
-	{ label: 'email', href: 'mailto:hello@example.com' },
+	{ label: 'github', href: 'https://github.com/Berkkirik', external: true },
+	{ label: 'linkedin', href: 'https://www.linkedin.com/in/berkkirik/', external: true },
+	{ label: 'orcid', href: 'https://orcid.org/0009-0004-5045-3048', external: true },
+	{ label: 'email', href: 'mailto:berk.kirik@outlook.com' },
 	{ label: 'rss', href: '/rss.xml' },
 ];

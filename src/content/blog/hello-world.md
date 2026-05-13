@@ -1,24 +1,29 @@
 ---
 title: "Hello, world"
-description: "First post — what this blog is for and what to expect."
+description: "What this blog is for and what to expect."
 pubDate: 2026-05-13
 tags: ["meta", "intro"]
 ---
 
 This is the first post on the new site. The plan: short, honest notes on
-things I'm learning — code, side projects, papers, occasional opinions.
+things I'm working on or thinking about — production ML systems, LLMs,
+agents, and the unglamorous infra around them.
 
-## Why a blog?
+## Why a blog
 
-Writing forces clearer thinking than just having opinions in my head. Posts
-here will lean toward the kind of thing I'd want to read myself: concrete,
-specific, and short.
+Writing forces clearer thinking than just having opinions in my head. Most
+posts here will lean toward the kind of thing I'd want to read myself:
+concrete, specific, and short. The bar I'm trying to hit is "would this
+have saved past-me an afternoon?"
 
 ## What to expect
 
-- Notes from projects (the good and the dead-ends)
-- Things I figured out the hard way that might save someone else time
-- Occasional deep dives on a topic I'm currently nerd-sniped by
+- Notes from production: LoRA, RAG, agents, NER at scale, the things
+  that break and why.
+- Side-project write-ups when something turns out interesting.
+- Occasional paper reading notes (probably KANs, retrieval, alignment, and
+  graph ML).
+- Less polished: brief notes from things I'm currently nerd-sniped by.
 
 That's it. Welcome.
 

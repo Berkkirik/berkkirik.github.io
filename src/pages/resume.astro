@@ -2,49 +2,177 @@
 import Layout from '../layouts/Layout.astro';
 import { SITE, SOCIALS } from '../config';
 
-// Edit this to keep the on-page summary in sync with the PDF.
-const experience = [
+interface Job {
+	role: string;
+	company: string;
+	location: string;
+	period: string;
+	url?: string;
+	summary?: string;
+	bullets: string[];
+}
+
+const experience: Job[] = [
 	{
-		role: 'Role title (placeholder)',
-		company: 'Company name',
-		period: '2024 — present',
+		role: 'Senior AI Engineer',
+		company: 'Etiya',
+		location: 'Türkiye',
+		period: 'Sep 2025 — present',
+		url: 'https://www.etiya.com/',
+		summary:
+			'Building production LLM and agentic-AI systems on a microservices architecture.',
 		bullets: [
-			'One-line accomplishment with a measurable outcome.',
-			'Another concrete thing you shipped or owned.',
+			'Fine-tuned large code models with LoRA on Hugging Face — +40% domain-specific code-completion accuracy at −90% training cost (only 0.1% of params trained), with A/B testing for adapter swapping.',
+			'Built a multi-tenant NER platform with tenant-specific isolation, automated model selection based on SLAs, and sub-200ms inference latency.',
+			'Shipped a multi-layer guardrail system (Guardrails AI + NeMo Guardrails + custom) blocking 89.2% of harmful outputs, with 97% PII detection across 15+ categories, SHAP explainability, Redis-cached <50ms responses, and Prometheus/Grafana observability — handling 5K+ concurrent requests.',
+			'Built an enterprise RAG pipeline over 500K+ documents using hybrid search (vector + BM25), HyDE query rewriting, cross-encoder re-ranking, and RAGAS evaluation — 92% recall@10, 45% fewer hallucinations, sub-3s responses across 20+ file formats.',
+			'Architected an agentic-AI platform with LangGraph/CrewAI (ReAct + Plan-and-Execute) across 25+ tools, with episodic + knowledge-graph memory, LangSmith tracing, and self-healing pipelines at 99.2% task completion.',
 		],
 	},
 	{
-		role: 'Previous role (placeholder)',
-		company: 'Previous company',
-		period: '2022 — 2024',
+		role: 'Data Scientist Team Lead / Backend Engineer',
+		company: 'Im-Par',
+		location: 'Frankfurt am Main, Germany',
+		period: 'Sep 2023 — Sep 2025',
+		url: 'https://im-par.de/',
+		summary:
+			'Led the ML pipeline lifecycle for financial-message compliance, fraud detection, and a cloud-native banking platform.',
 		bullets: [
-			'Replace with real bullets from your CV.',
+			'Built NLP-driven Python systems to validate and auto-generate compliant ISO 20022 and SWIFT MT/MX messages, materially reducing manual intervention in regulated workflows.',
+			'Directed LLM fine-tuning for compliance, fraud detection, and message classification (Hugging Face, PyTorch); shipped RAG pipelines with FAISS vector stores for domain-specific chatbots and regulatory support.',
+			'Deployed graph-based fraud detection on Neo4j + GraphQL with link prediction, clustering, and anomaly detection — combined with Pandas/Spark mining for real-time signals.',
+			'Designed and led backend platform development in Golang (performance-critical services) and Python/Django (AI orchestration/APIs); microservices used gRPC internally and REST externally, fronted by KrakenD and secured with Keycloak (RBAC + ABAC).',
+			'Built a Kubernetes-native infrastructure with custom Golang operators/controllers and GitOps-driven CI/CD for ML and backend workloads across cloud and hybrid environments.',
+			'Acted as Lead for the Data Science team across multiple Agile squads — sprint planning, retros, and cross-team collaboration with engineering and product.',
+		],
+	},
+	{
+		role: 'Data Scientist',
+		company: 'Tiga Information Technologies Inc.',
+		location: 'Ankara, Türkiye',
+		period: 'Aug 2021 — Sep 2023',
+		url: 'https://www.tigahealth.com/',
+		summary: 'Healthcare AI — sensor-fusion activity recognition from edge to mobile.',
+		bullets: [
+			'Designed a multi-device sensing pipeline (ESP-32 + Raspberry Pi) to gather real-time motion, environmental, and location-based sensor data for continuous monitoring.',
+			'Built preprocessing workflows for timestamp synchronization, noise filtering, and normalization (Min-Max, Z-Score) to handle missing data, sensor drift, and latency.',
+			'Applied PCA, FFT, and LDA for feature extraction; trained an ensemble of Decision Trees, SVM, Random Forest, CNNs, and XGBoost to classify user activities with high precision.',
+			'Built FastAPI services for real-time inference and Django for user data, auth, and app logic; integrated trained models into mobile apps with on-device inference and adaptive feedback.',
+			'Used k-fold cross-validation, Grid Search, and Random Search to evaluate generalization across users; modeled behavioral patterns in Neo4j + GraphQL.',
 		],
 	},
 ];
 
-const skills = {
-	Languages: ['Python', 'TypeScript', 'JavaScript', 'SQL'],
-	'Frameworks & tools': ['Astro', 'Node', 'React', 'Docker', 'Git'],
-	Interests: ['ML', 'backend systems', 'developer tooling'],
+const education = [
+	{
+		degree: 'MSc, Computer Engineering',
+		school: 'Ankara University',
+		period: 'Feb 2026 — present',
+		location: 'Ankara, Türkiye',
+	},
+	{
+		degree: 'BSc, Biomedical Engineering',
+		school: 'Ankara University',
+		period: 'Aug 2018 — May 2024',
+		location: 'Ankara, Türkiye',
+		url: 'http://bme.eng.ankara.edu.tr',
+	},
+	{
+		degree: 'Associate, Computer Programming',
+		school: 'Istanbul University',
+		period: 'Aug 2022 — Jul 2024',
+		location: 'Istanbul, Türkiye',
+		url: 'https://www.istanbul.edu.tr',
+	},
+];
+
+const skills: Record<string, string[]> = {
+	Languages: ['Python', 'Go', 'C++', 'PHP', 'SQL'],
+	'ML / DL': [
+		'PyTorch',
+		'TensorFlow',
+		'Keras',
+		'JAX / Flax',
+		'Hugging Face',
+		'LoRA',
+		'XGBoost',
+		'scikit-learn',
+	],
+	'LLM / Agentic': [
+		'LangGraph',
+		'CrewAI',
+		'LangSmith',
+		'RAG (FAISS, BM25, HyDE)',
+		'RAGAS',
+		'Guardrails AI',
+		'NeMo Guardrails',
+	],
+	Backend: ['FastAPI', 'Django', 'Flask', 'Node.js', 'gRPC', 'REST', 'KrakenD'],
+	'Data / Graphs': ['PostgreSQL', 'Oracle', 'Redis', 'Kafka', 'Neo4j', 'GraphQL', 'Pandas', 'Spark'],
+	'Infra / DevOps': ['Kubernetes', 'Docker', 'Docker Swarm', 'GitOps', 'AWS', 'Prometheus / Grafana', 'Keycloak'],
+	Embedded: ['ESP-32', 'Raspberry Pi', 'sensor fusion'],
 };
+
+const publications = [
+	{
+		title:
+			'Enhancing crayfish sex identification with Kolmogorov-Arnold networks and stacked autoencoders',
+		venue: 'Nature — Scientific Reports',
+		year: 2025,
+		authors:
+			'Yasin Atilkan, Berk Kırık, Eren Tuna Açıkbaş, Fatih Ekinci, Koray Açıcı, Tunç Aşuroğlu, Recep Benzer, Mehmet Serdar Güzel, Semra Benzer',
+		link: 'https://www.nature.com/articles/s41598-025-34095-z',
+	},
+	{
+		title:
+			'Advancing Crayfish Disease Detection: A Comparative Study of Deep Learning and Canonical Machine Learning Techniques',
+		venue: 'Peer-reviewed journal',
+		year: 2024,
+		authors:
+			'Yasin Atilkan, Berk Kırık, Koray Açıcı, Recep Benzer, Fatih Ekinci, Mehmet Serdar Güzel',
+	},
+];
+
+const certifications = [
+	{
+		title: 'Concurrency in Go',
+		issuer: 'UC Irvine — Coursera',
+		date: 'Dec 2023',
+		link: 'https://coursera.org/verify/UZD%20D%20P5EM58E3',
+	},
+	{ title: 'Python for Data Science', issuer: 'Verified Certificate', date: 'May 2022' },
+	{ title: 'Introduction to Linux', issuer: 'Verified Certificate', date: 'May 2022' },
+	{ title: 'AI For Everyone (I & II)', issuer: 'e-Government Certificate', date: '—' },
+];
+
+const languages = [
+	{ name: 'Turkish', level: 'Native' },
+	{ name: 'English', level: 'B2 / C1 (reading)' },
+	{ name: 'German', level: 'A1–A2' },
+];
 ---
 
-<Layout title="resume" description="Resume and contact information for Berk Kirik.">
+<Layout
+	title="resume"
+	description="Resume of Berk Kırık — Senior AI Engineer. Experience, education, skills, and publications."
+>
 	<section>
 		<h1 class="prompt">cat resume.md</h1>
+		<p>
+			<strong>Berk Kırık</strong> — Senior AI Engineer. 5+ years building production
+			ML in microservices: LLMs, RAG, agentic AI, NER, and the Kubernetes infra
+			underneath. Background in fintech and healthcare AI.
+		</p>
 		<p>
 			Full PDF:{' '}
 			<a href={SITE.resumePath} target="_blank" rel="noopener">
 				download {SITE.resumePath.split('/').pop()}
 			</a>
-		</p>
-		<p class="muted">
-			The PDF is the source of truth. The summary below is a quick on-page version.
+			<span class="muted"> · the PDF is the source of truth.</span>
 		</p>
 	</section>
 
-	<section>
+	<section id="contact">
 		<h2 class="prompt">contact</h2>
 		<ul class="stack stack-sm">
 			{SOCIALS.filter((s) => s.label !== 'rss').map((s) => (
@@ -53,16 +181,25 @@ const skills = {
 					<a href={s.href} target={s.external ? '_blank' : undefined} rel={s.external ? 'me noopener' : undefined}>{s.label}</a>
 				</li>
 			))}
+			<li><span class="dim">&rarr;</span> <span class="muted">Ankara, Türkiye</span></li>
 		</ul>
 	</section>
 
-	<section>
+	<section id="experience">
 		<h2 class="prompt">experience</h2>
 		<ul class="list">
 			{experience.map((job) => (
 				<li class="list-item">
-					<span class="meta">{job.period}</span>
-					<span class="title">{job.role} · <span class="muted">{job.company}</span></span>
+					<span class="meta">{job.period} · {job.location}</span>
+					<span class="title">
+						{job.role} ·{' '}
+						{job.url ? (
+							<a href={job.url} target="_blank" rel="noopener">{job.company}</a>
+						) : (
+							<span class="muted">{job.company}</span>
+						)}
+					</span>
+					{job.summary && <p class="muted">{job.summary}</p>}
 					<ul>
 						{job.bullets.map((b) => <li>{b}</li>)}
 					</ul>
@@ -71,7 +208,26 @@ const skills = {
 		</ul>
 	</section>
 
-	<section>
+	<section id="education">
+		<h2 class="prompt">education</h2>
+		<ul class="list">
+			{education.map((e) => (
+				<li class="list-item">
+					<span class="meta">{e.period} · {e.location}</span>
+					<span class="title">
+						{e.degree} ·{' '}
+						{e.url ? (
+							<a href={e.url} target="_blank" rel="noopener">{e.school}</a>
+						) : (
+							<span class="muted">{e.school}</span>
+						)}
+					</span>
+				</li>
+			))}
+		</ul>
+	</section>
+
+	<section id="skills">
 		<h2 class="prompt">skills</h2>
 		<ul class="stack stack-sm">
 			{Object.entries(skills).map(([group, items]) => (
@@ -79,6 +235,52 @@ const skills = {
 					<strong>{group}:</strong>{' '}
 					<span class="muted">{items.join(' · ')}</span>
 				</li>
+			))}
+		</ul>
+	</section>
+
+	<section id="publications">
+		<h2 class="prompt">publications</h2>
+		<ul class="list">
+			{publications.map((p) => (
+				<li class="list-item">
+					<span class="meta">{p.year} · {p.venue}</span>
+					<span class="title">
+						{p.link ? (
+							<a href={p.link} target="_blank" rel="noopener">{p.title}</a>
+						) : p.title}
+					</span>
+					<p class="muted">{p.authors}</p>
+				</li>
+			))}
+		</ul>
+		<p class="muted">
+			Full record on{' '}
+			<a href="https://orcid.org/0009-0004-5045-3048" target="_blank" rel="noopener">ORCID</a>.
+		</p>
+	</section>
+
+	<section id="certifications">
+		<h2 class="prompt">certifications</h2>
+		<ul class="stack stack-sm">
+			{certifications.map((c) => (
+				<li>
+					<strong>
+						{c.link ? (
+							<a href={c.link} target="_blank" rel="noopener">{c.title}</a>
+						) : c.title}
+					</strong>{' '}
+					<span class="muted">— {c.issuer}{c.date && c.date !== '—' ? ` · ${c.date}` : ''}</span>
+				</li>
+			))}
+		</ul>
+	</section>
+
+	<section id="languages">
+		<h2 class="prompt">languages</h2>
+		<ul class="stack stack-sm">
+			{languages.map((l) => (
+				<li><strong>{l.name}:</strong> <span class="muted">{l.level}</span></li>
 			))}
 		</ul>
 	</section>

@@ -1,36 +1,76 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import RainbowBars from '../components/RainbowBars.astro';
 import { SITE } from '../config';
 ---
 
-<Layout title="about" description={SITE.description}>
-	<div class="stack">
-		<RainbowBars />
+<Layout title="" description={SITE.description}>
+	<!-- Tile 1 — Hero (light) -->
+	<section class="tile tile-light">
+		<div class="tile-stack">
+			<h1 class="t-hero">Berk Kırık.</h1>
+			<p class="t-lead">
+				Senior AI Engineer. Five years building production ML in microservices —
+				LLMs, RAG, agentic AI, and the Kubernetes infrastructure underneath.
+			</p>
+			<div class="ctas">
+				<a class="btn btn-primary" href="/projects/">View work</a>
+				<a class="btn btn-secondary-pill" href="mailto:berk.kirik@outlook.com">Get in touch</a>
+			</div>
+		</div>
+	</section>
 
-		<h1 class="display">Berk Kırık</h1>
+	<!-- Tile 2 — Currently (dark) -->
+	<section class="tile tile-dark">
+		<div class="tile-stack">
+			<p class="t-caption" style="color: var(--body-muted); text-transform: uppercase; letter-spacing: 0.08em;">
+				Currently
+			</p>
+			<h2 class="t-display-lg" style="color: var(--body-on-dark);">
+				Production ML at <a href="https://www.etiya.com/" target="_blank" rel="noopener" style="color: var(--primary-on-dark);">Etiya</a>.
+			</h2>
+			<p class="t-lead-airy" style="color: var(--body-muted);">
+				LoRA fine-tuning. Multi-tenant NER at sub-200ms. Enterprise RAG over 500K
+				documents. Agentic platforms with LangGraph and CrewAI. The unglamorous
+				infra that makes them ship.
+			</p>
+			<div class="ctas">
+				<a class="btn btn-primary" href="/resume/#experience">See the details</a>
+			</div>
+		</div>
+	</section>
 
-		<p class="small" style="text-transform: none; letter-spacing: 0.02em; color: var(--fg-muted);">
-			Senior AI Engineer · Ankara, Türkiye
-		</p>
+	<!-- Tile 3 — BE → AI bridge (parchment) -->
+	<section class="tile tile-parchment">
+		<div class="tile-stack">
+			<p class="t-caption" style="text-transform: uppercase; letter-spacing: 0.08em;">
+				Background
+			</p>
+			<h2 class="t-display-lg">Software Engineer.</h2>
+			<p class="t-lead-airy">
+				BSc in Biomedical Engineering at Ankara University taught me how
+				signals from a body become decisions a system makes — and that
+				foundation still sits underneath the work I do, from sensor-fusion
+				healthcare AI at <a href="https://www.tigahealth.com/" target="_blank" rel="noopener">Tiga</a>
+				to ongoing research on biological classification.
+			</p>
+			<div class="ctas">
+				<a class="btn btn-secondary-pill" href="/resume/#education">Education</a>
+				<a class="btn btn-secondary-pill" href="/resume/#publications">Publications</a>
+			</div>
+		</div>
+	</section>
 
-		<p>
-			I build production ML systems — LLM fine-tuning, RAG pipelines, multi-tenant
-			NER, agentic AI, and the Kubernetes infra underneath. Currently at <a
-				href="https://www.etiya.com/"
-				target="_blank"
-				rel="noopener">Etiya</a>; previously at <a href="https://im-par.de/" target="_blank" rel="noopener">Im-Par</a>
-			(Frankfurt) and <a href="https://www.tigahealth.com/" target="_blank" rel="noopener">Tiga</a>
-			(Ankara). MSc Computer Engineering at Ankara University; co-author on a
-			<a href="https://www.nature.com/articles/s41598-025-34095-z" target="_blank" rel="noopener">Nature Scientific Reports paper</a>
-			on Kolmogorov–Arnold networks.
-		</p>
-
-		<p>
-			<a href="/projects/">projects</a> ·
-			<a href="/blog/">blog</a> ·
-			<a href="/resume/">resume</a> ·
-			<a href="mailto:berk.kirik@outlook.com">email</a>
-		</p>
-	</div>
+	<!-- Closing tile (light) -->
+	<section class="tile tile-light">
+		<div class="tile-stack">
+			<h2 class="t-display-lg">Get in touch.</h2>
+			<p class="t-lead-airy">
+				Best reached by email. The full CV is one click away.
+			</p>
+			<div class="ctas">
+				<a class="btn btn-primary" href="mailto:berk.kirik@outlook.com">Email me</a>
+				<a class="btn btn-secondary-pill" href={SITE.resumePath} target="_blank" rel="noopener">Download CV</a>
+			</div>
+		</div>
+	</section>
 </Layout>

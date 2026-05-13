@@ -1,0 +1,14 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="404" description="Page not found.">
+	<section>
+		<h1 class="prompt">cat {Astro.url.pathname}</h1>
+		<p><code>cat: {Astro.url.pathname}: No such file or directory</code></p>
+		<p class="muted">
+			The page you were looking for doesn't exist. Try one of the links
+			above, or head back <a href="/">home</a>.
+		</p>
+	</section>
+</Layout>

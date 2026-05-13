@@ -1,0 +1,85 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { SITE, SOCIALS } from '../config';
+
+// Edit this to keep the on-page summary in sync with the PDF.
+const experience = [
+	{
+		role: 'Role title (placeholder)',
+		company: 'Company name',
+		period: '2024 — present',
+		bullets: [
+			'One-line accomplishment with a measurable outcome.',
+			'Another concrete thing you shipped or owned.',
+		],
+	},
+	{
+		role: 'Previous role (placeholder)',
+		company: 'Previous company',
+		period: '2022 — 2024',
+		bullets: [
+			'Replace with real bullets from your CV.',
+		],
+	},
+];
+
+const skills = {
+	Languages: ['Python', 'TypeScript', 'JavaScript', 'SQL'],
+	'Frameworks & tools': ['Astro', 'Node', 'React', 'Docker', 'Git'],
+	Interests: ['ML', 'backend systems', 'developer tooling'],
+};
+---
+
+<Layout title="resume" description="Resume and contact information for Berk Kirik.">
+	<section>
+		<h1 class="prompt">cat resume.md</h1>
+		<p>
+			Full PDF:{' '}
+			<a href={SITE.resumePath} target="_blank" rel="noopener">
+				download {SITE.resumePath.split('/').pop()}
+			</a>
+		</p>
+		<p class="muted">
+			The PDF is the source of truth. The summary below is a quick on-page version.
+		</p>
+	</section>
+
+	<section>
+		<h2 class="prompt">contact</h2>
+		<ul class="stack stack-sm">
+			{SOCIALS.filter((s) => s.label !== 'rss').map((s) => (
+				<li>
+					<span class="dim">&rarr;</span>{' '}
+					<a href={s.href} target={s.external ? '_blank' : undefined} rel={s.external ? 'me noopener' : undefined}>{s.label}</a>
+				</li>
+			))}
+		</ul>
+	</section>
+
+	<section>
+		<h2 class="prompt">experience</h2>
+		<ul class="list">
+			{experience.map((job) => (
+				<li class="list-item">
+					<span class="meta">{job.period}</span>
+					<span class="title">{job.role} · <span class="muted">{job.company}</span></span>
+					<ul>
+						{job.bullets.map((b) => <li>{b}</li>)}
+					</ul>
+				</li>
+			))}
+		</ul>
+	</section>
+
+	<section>
+		<h2 class="prompt">skills</h2>
+		<ul class="stack stack-sm">
+			{Object.entries(skills).map(([group, items]) => (
+				<li>
+					<strong>{group}:</strong>{' '}
+					<span class="muted">{items.join(' · ')}</span>
+				</li>
+			))}
+		</ul>
+	</section>
+</Layout>

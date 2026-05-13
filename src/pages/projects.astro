@@ -1,0 +1,65 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+interface Project {
+	title: string;
+	description: string;
+	tags?: string[];
+	repo?: string;
+	demo?: string;
+	year?: number;
+}
+
+// Edit this list to add/remove projects. Most recent first.
+const projects: Project[] = [
+	{
+		title: 'Personal Website',
+		description:
+			'This site you are reading. Built with Astro, hosted on GitHub Pages, designed as a terminal/monospace aesthetic.',
+		tags: ['astro', 'css', 'github-pages'],
+		repo: 'https://github.com/berkkirik/berkkirik.github.io',
+		year: 2026,
+	},
+	{
+		title: 'Project Two (placeholder)',
+		description:
+			'Short, plain-language description of what this project does and why it exists. Two sentences max.',
+		tags: ['python', 'ml'],
+		repo: 'https://github.com/berkkirik/example',
+		demo: 'https://example.com',
+		year: 2025,
+	},
+	{
+		title: 'Project Three (placeholder)',
+		description: 'Another placeholder. Replace with a real project.',
+		tags: ['typescript'],
+		repo: 'https://github.com/berkkirik/example-two',
+		year: 2024,
+	},
+];
+---
+
+<Layout title="projects" description="Things Berk Kirik has built.">
+	<section>
+		<h1 class="prompt">ls projects/</h1>
+		<p class="muted">A non-exhaustive list of things I've built. Newest first.</p>
+	</section>
+
+	<section>
+		<ul class="list">
+			{projects.map((p) => (
+				<li class="list-item">
+					<span class="meta">
+						{p.year ? `${p.year} · ` : ''}{p.tags?.length ? p.tags.map((t) => `#${t}`).join(' ') : ''}
+					</span>
+					<span class="title">{p.title}</span>
+					<p>{p.description}</p>
+					<div class="stack" style="flex-direction: row; gap: 1rem; font-size: 0.8125rem;">
+						{p.repo && <a href={p.repo} target="_blank" rel="noopener">repo &rarr;</a>}
+						{p.demo && <a href={p.demo} target="_blank" rel="noopener">demo &rarr;</a>}
+					</div>
+				</li>
+			))}
+		</ul>
+	</section>
+</Layout>

@@ -1,0 +1,41 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+const posts = (await getCollection('blog'))
+	.filter((p) => import.meta.env.PROD ? !p.data.draft : true)
+	.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+
+const fmt = (d: Date) =>
+	d.toISOString().slice(0, 10);
+---
+
+<Layout title="blog" description="Writing by Berk Kirik.">
+	<section>
+		<h1 class="prompt">ls blog/</h1>
+		<p class="muted">
+			Notes, write-ups, and occasional rants. Subscribe via <a href="/rss.xml">RSS</a>.
+		</p>
+	</section>
+
+	<section>
+		{posts.length === 0 ? (
+			<p class="muted">No posts yet.</p>
+		) : (
+			<ul class="list">
+				{posts.map((post) => (
+					<li class="list-item">
+						<span class="meta">{fmt(post.data.pubDate)}</span>
+						<a class="title" href={`/blog/${post.id}/`}>{post.data.title}</a>
+						{post.data.description && <p>{post.data.description}</p>}
+						{post.data.tags.length > 0 && (
+							<ul class="tags">
+								{post.data.tags.map((t) => <li>{t}</li>)}
+							</ul>
+						)}
+					</li>
+				))}
+			</ul>
+		)}
+	</section>
+</Layout>

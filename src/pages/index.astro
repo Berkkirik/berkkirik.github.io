@@ -1,0 +1,50 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { SITE, SOCIALS } from '../config';
+---
+
+<Layout title="about" description={SITE.description}>
+	<section>
+		<h1 class="prompt">whoami</h1>
+		<p>
+			I'm <strong>Berk Kirik</strong>, a software engineer.<span class="cursor" aria-hidden="true"></span>
+		</p>
+		<p class="muted">
+			[Replace this paragraph with a short, honest paragraph about yourself —
+			what you build, what you're into, where you are. Two to four sentences
+			is the sweet spot.]
+		</p>
+	</section>
+
+	<section>
+		<h2 class="prompt">cat now.txt</h2>
+		<p>
+			Currently working on personal projects and writing here from time to time.
+		</p>
+	</section>
+
+	<section>
+		<h2 class="prompt">ls links/</h2>
+		<ul class="stack stack-sm">
+			{SOCIALS.filter((s) => s.label !== 'rss').map((s) => (
+				<li>
+					<span class="dim">&rarr;</span>{' '}
+					<a href={s.href} target={s.external ? '_blank' : undefined} rel={s.external ? 'me noopener' : undefined}>{s.label}</a>
+				</li>
+			))}
+			<li>
+				<span class="dim">&rarr;</span>{' '}
+				<a href={SITE.resumePath} target="_blank" rel="noopener">resume (pdf)</a>
+			</li>
+		</ul>
+	</section>
+
+	<section>
+		<h2 class="prompt">cd</h2>
+		<ul class="stack stack-sm">
+			<li><span class="dim">&rarr;</span> <a href="/projects/">/projects</a></li>
+			<li><span class="dim">&rarr;</span> <a href="/blog/">/blog</a></li>
+			<li><span class="dim">&rarr;</span> <a href="/resume/">/resume</a></li>
+		</ul>
+	</section>
+</Layout>

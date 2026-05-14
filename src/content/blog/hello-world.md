@@ -6,7 +6,7 @@ tags: ["meta", "intro"]
 ---
 
 This is the first post on the new site. The plan: short, honest notes on
-things I'm working on or thinking about — production ML systems, LLMs,
+things I'm working on or thinking about — production AI systems, LLMs,
 agents, and the unglamorous infra around them.
 
 ## Why a blog

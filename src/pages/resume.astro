@@ -12,7 +12,6 @@ interface Job {
 	bullets: { heading: string; body: string }[];
 }
 
-// ---- Experience: every CV sub-heading rendered as its own bullet ----
 const experience: Job[] = [
 	{
 		role: 'Senior AI Engineer',
@@ -20,8 +19,7 @@ const experience: Job[] = [
 		location: 'Türkiye',
 		period: 'Sep 2025 — present',
 		url: 'https://www.etiya.com/',
-		summary:
-			'Building production LLM and agentic-AI systems on a microservices architecture.',
+		summary: 'Production LLM and agentic-AI systems on a microservices architecture.',
 		bullets: [
 			{
 				heading: 'Code-Generation Fine-tuning',
@@ -31,22 +29,22 @@ const experience: Job[] = [
 			{
 				heading: 'Multi-Tenant NER System',
 				body:
-					'Built a scalable Named Entity Recognition platform serving multiple enterprise clients with tenant-specific isolation, automated model selection based on SLAs, and sub-200ms inference latency.',
+					'Scalable Named Entity Recognition platform serving multiple enterprise clients with tenant-specific isolation, automated model selection based on SLAs, and sub-200ms inference latency.',
 			},
 			{
 				heading: 'Guardrail System',
 				body:
-					'Integrated Guardrails AI, NeMo Guardrails, and custom layers to block 89.2% of harmful outputs. Includes PII detection at 97% accuracy across 15+ categories, explainable AI with SHAP, a full-stack monitoring app (React / FastAPI / PostgreSQL), Redis caching for sub-50ms response times, and Prometheus / Grafana observability — all on a microservices architecture handling 5K+ concurrent requests.',
+					'Multi-layer guardrails (Guardrails AI + NeMo + custom) blocking 89.2% of harmful outputs. PII detection at 97% accuracy across 15+ categories, SHAP explainability, full-stack monitoring app (React / FastAPI / PostgreSQL), Redis caching for sub-50ms responses, Prometheus / Grafana observability — handling 5K+ concurrent requests.',
 			},
 			{
 				heading: 'Enterprise RAG System',
 				body:
-					'Production pipeline processing 500K+ documents with hybrid search (vector + BM25), advanced chunking, query rewriting (HyDE), cross-encoder re-ranking, and RAGAS evaluation. Achieved 92% recall@10, reduced hallucinations by 45%, and optimized to sub-3-second responses with support for 20+ file formats.',
+					'Production pipeline processing 500K+ documents with hybrid search (vector + BM25), advanced chunking, HyDE query rewriting, cross-encoder re-ranking, and RAGAS evaluation. 92% recall@10, 45% reduced hallucinations, sub-3s responses, 20+ file formats.',
 			},
 			{
 				heading: 'Agentic AI Development',
 				body:
-					'Multi-agent orchestration using LangGraph / CrewAI with ReAct and Plan-and-Execute patterns across 25+ tools. Includes autonomous code-review agents, multi-agent collaboration (researcher / analyst / writer / critic), episodic and knowledge-graph memory, LangSmith tracing, and self-healing pipelines at 99.2% task completion — with guardrail integration for safe autonomous operation.',
+					'Multi-agent orchestration with LangGraph / CrewAI (ReAct + Plan-and-Execute) across 25+ tools. Autonomous code-review agents, multi-agent collaboration (researcher / analyst / writer / critic), episodic + knowledge-graph memory, LangSmith tracing, self-healing pipelines at 99.2% task completion, guardrail integration.',
 			},
 		],
 	},
@@ -62,37 +60,37 @@ const experience: Job[] = [
 			{
 				heading: 'ML Model Development & NLP Automation',
 				body:
-					'Led the full lifecycle of ML pipelines designed to validate financial message formats such as ISO 20022 and SWIFT MT/MX. Built NLP-driven systems in Python to automate the generation of compliant message structures, reducing manual intervention and improving overall accuracy and process efficiency.',
+					'Led the full ML pipeline lifecycle for validating ISO 20022 and SWIFT MT/MX financial message formats. Built NLP-driven systems in Python to automate compliant message generation.',
 			},
 			{
 				heading: 'LLM Fine-Tuning, Generative AI & RAG Integration',
 				body:
-					'Directed the fine-tuning of large language models for financial compliance, fraud detection, and message classification using transfer learning, prompt engineering, and hyperparameter tuning (Hugging Face, PyTorch). Integrated Generative AI for automated message construction and domain-specific chatbots, and developed RAG pipelines combining custom FAISS vector stores with LLMs for regulatory support.',
+					'Directed LLM fine-tuning for compliance, fraud detection, and message classification (Hugging Face, PyTorch). Integrated Generative AI for automated message construction and domain chatbots, RAG pipelines combining FAISS vector stores with LLMs for regulatory support.',
 			},
 			{
 				heading: 'Graph-Based Fraud Detection & Data Mining',
 				body:
-					'Built and deployed graph-based systems on Neo4j and GraphQL to detect fraud within large-scale financial datasets — link prediction, clustering, and anomaly detection — combined with Pandas / Spark mining for real-time, actionable insights.',
+					'Graph-based systems on Neo4j + GraphQL — link prediction, clustering, anomaly detection — combined with Pandas / Spark mining for real-time signals over large financial datasets.',
 			},
 			{
 				heading: 'Backend Platform Engineering (Golang + Python)',
 				body:
-					'Designed and led development of a cloud-native banking platform using Golang for performance-critical services and Python / Django for AI orchestration and API logic. Focused on modularity, horizontal scalability, and resilience, working closely with globally distributed Agile teams to align backend architecture with evolving AI workloads, compliance needs, and business goals.',
+					'Designed and led a cloud-native banking platform: Golang for performance-critical services, Python / Django for AI orchestration. Globally distributed Agile teams.',
 			},
 			{
 				heading: 'Microservices Architecture with gRPC & REST',
 				body:
-					'Built a production-grade microservices ecosystem (Golang + Python). gRPC for fast internal communication and REST for secure external integrations. Deployed KrakenD as the API gateway for traffic flow, request aggregation, and observability, and integrated Keycloak for enterprise security with RBAC + ABAC for fine-grained access control and regulatory compliance.',
+					'Production microservices (Golang + Python). gRPC for internal, REST for external. KrakenD as API gateway, Keycloak for RBAC + ABAC.',
 			},
 			{
 				heading: 'Kubernetes Infrastructure & DevOps Automation',
 				body:
-					'Developed and maintained a Kubernetes-native infrastructure for backend and ML workloads across cloud and hybrid environments. Built custom Kubernetes operators / controllers in Golang for dynamic orchestration and autoscaling. Automated deployments via shell scripts, cron jobs, and GitOps-driven CI/CD pipelines.',
+					'Kubernetes-native infrastructure with custom Golang operators / controllers for dynamic orchestration and autoscaling. Shell scripts, cron jobs, GitOps-driven CI/CD pipelines.',
 			},
 			{
-				heading: 'Agile Team Leadership & Cross-Functional Collaboration',
+				heading: 'Agile Team Leadership',
 				body:
-					'Acted as Lead for the Data Science team, overseeing deliverables across multiple Agile squads. Led sprint planning, daily standups, and retrospectives, collaborating across data science, engineering, and product to accelerate AI-feature development.',
+					'Lead for the Data Science team across multiple Agile squads — sprint planning, retrospectives, cross-team collaboration with engineering and product.',
 			},
 		],
 	},
@@ -102,59 +100,57 @@ const experience: Job[] = [
 		location: 'Ankara, Türkiye',
 		period: 'Aug 2021 — Sep 2023',
 		url: 'https://www.tigahealth.com/',
-		summary:
-			'Healthcare AI — sensor-fusion activity recognition from edge to mobile.',
+		summary: 'Healthcare AI — sensor-fusion activity recognition from edge to mobile.',
 		bullets: [
 			{
 				heading: 'Device & Sensor Integration',
 				body:
-					'Designed a multi-device sensing pipeline using ESP-32 WiFi modules and Raspberry Pi boards to gather real-time data from motion, environmental, and location-based sensors — focused on reliable data capture and wireless communication for continuous monitoring in edge environments.',
+					'Multi-device sensing pipeline using ESP-32 WiFi modules and Raspberry Pi to gather real-time motion, environmental, and location-based sensor data — for continuous edge monitoring.',
 			},
 			{
 				heading: 'Data Processing & Synchronization',
 				body:
-					'Implemented timestamp synchronization, noise filtering, and data normalization (Min-Max scaling, Z-Score standardization) for high-quality input to downstream ML. Designed preprocessing workflows to handle missing data, sensor drift, and latency in real-time systems.',
+					'Timestamp synchronization, noise filtering, and data normalization (Min-Max, Z-Score) for high-quality input to downstream ML. Handling for missing data, sensor drift, and latency.',
 			},
 			{
 				heading: 'Feature Engineering & Dimensionality Reduction',
 				body:
-					'Applied Principal Component Analysis (PCA), Fast Fourier Transform (FFT), and Linear Discriminant Analysis (LDA) for feature extraction — improving signal separation between user activity classes, model interpretability, and computational overhead.',
+					'PCA, FFT, and LDA for feature extraction — improving signal separation between user activity classes, model interpretability, and computational overhead.',
 			},
 			{
 				heading: 'Machine Learning & Deep Learning Models',
 				body:
-					'Trained Decision Trees, SVM, Random Forest, and CNNs to classify user activities from sensor streams with high precision, using XGBoost and ensemble approaches to enhance generalization and mitigate overfitting in real-world use cases.',
+					'Decision Trees, SVM, Random Forest, and CNNs for activity classification from sensor streams. XGBoost and ensemble approaches for generalization and reducing overfitting.',
 			},
 			{
-				heading: 'Backend API Development with Django & FastAPI',
+				heading: 'Backend API Development',
 				body:
-					'Built backend services using FastAPI for real-time inference APIs and Django for managing user data, authentication, and application logic. Developed RESTful endpoints to support mobile and web apps, with logging, feedback loops, and results visualization for end users and clinical reviewers — ensuring high performance and low latency across distributed environments.',
+					'FastAPI for real-time inference APIs, Django for user data, authentication, and application logic. RESTful endpoints supporting mobile and web apps, with logging, feedback loops, and results visualization.',
 			},
 			{
 				heading: 'Mobile App Deployment & Real-Time Feedback',
 				body:
-					'Built mobile app interfaces that embedded trained models to deliver real-time alerts, personalized activity tracking, and adaptive feedback. Optimized model size and latency for seamless on-device inference.',
+					'Mobile app interfaces embedding trained models for real-time alerts, personalized activity tracking, and adaptive feedback. Optimized model size and latency for on-device inference.',
 			},
 			{
 				heading: 'Model Fine-Tuning & Performance Optimization',
 				body:
-					'Applied transfer learning, hyperparameter tuning, and data augmentation to improve robustness and reduce false positives — refining CNN and NLP-based architectures to suit real-world healthcare constraints and variability.',
+					'Transfer learning, hyperparameter tuning, and data augmentation to reduce false positives. Refined CNN and NLP-based architectures for healthcare constraints and variability.',
 			},
 			{
 				heading: 'Validation & Evaluation Techniques',
 				body:
-					'Used k-fold cross-validation, Grid Search, and Random Search to systematically evaluate and optimize model performance — emphasizing consistent evaluation across diverse users and activity scenarios.',
+					'k-fold cross-validation, Grid Search, and Random Search to systematically evaluate and optimize model performance across diverse users and activity scenarios.',
 			},
 			{
 				heading: 'Graph-Based Behavioral Analysis & Data Mining',
 				body:
-					'Modeled user behavior patterns in Neo4j + GraphQL + Pandas through graph analysis. Extracted actionable insights from streaming sensor data and applied advanced data mining to support decision-making in healthcare and activity-monitoring contexts.',
+					'Neo4j + GraphQL + Pandas to model and query user behavior patterns through graph analysis. Actionable insights from streaming sensor data for healthcare and activity monitoring.',
 			},
 		],
 	},
 ];
 
-// ---- Education ----
 const education = [
 	{
 		degree: 'MSc, Computer Engineering',
@@ -168,7 +164,7 @@ const education = [
 		period: 'Aug 2018 — May 2024',
 		location: 'Ankara, Türkiye',
 		url: 'http://bme.eng.ankara.edu.tr',
-		note: 'Foundation in signal processing, sensor systems, biological/medical data, and statistics — directly applied in later healthcare-AI and biological-classification work.',
+		note: 'Foundation in signal processing, sensor systems, biological / medical data, and statistics — applied directly in later healthcare-AI and biological-classification work.',
 	},
 	{
 		degree: 'Associate, Computer Programming',
@@ -179,7 +175,6 @@ const education = [
 	},
 ];
 
-// ---- Skills (CV-grounded; items appear in CV BECERILER or work-experience text) ----
 const skills: Record<string, string[]> = {
 	'Programming languages': ['Python', 'Go', 'C++', 'PHP', 'SQL'],
 	'ML / Deep Learning': [
@@ -191,7 +186,7 @@ const skills: Record<string, string[]> = {
 		'LoRA',
 		'XGBoost',
 	],
-	'LLM / Agentic systems': [
+	'LLM / agentic systems': [
 		'LangGraph',
 		'CrewAI',
 		'LangSmith',
@@ -229,7 +224,6 @@ const skills: Record<string, string[]> = {
 	],
 };
 
-// ---- Publications ----
 const publications = [
 	{
 		title:
@@ -239,7 +233,7 @@ const publications = [
 		authors:
 			'Yasin Atilkan, Berk Kırık, Eren Tuna Açıkbaş, Fatih Ekinci, Koray Açıcı, Tunç Aşuroğlu, Recep Benzer, Mehmet Serdar Güzel, Semra Benzer',
 		summary:
-			'Binary classification on tabular and image datasets with imbalanced class distributions. KANs achieved 95–100% accuracy on tabular features; a stacked-autoencoder architecture lifted KAN performance ~3.5% on image features. McNemar / Wilcoxon tests confirmed significant differences vs. SVM, MLPs, and naive Bayes.',
+			'KANs at 95–100% accuracy on tabular features; stacked-autoencoder + KAN architecture lifted image-feature performance ~3.5%. McNemar / Wilcoxon tests confirmed significant differences vs. SVM, MLPs, and naive Bayes.',
 		link: 'https://www.nature.com/articles/s41598-025-34095-z',
 	},
 	{
@@ -250,15 +244,14 @@ const publications = [
 		authors:
 			'Yasin Atilkan, Berk Kırık, Koray Açıcı, Recep Benzer, Fatih Ekinci, Mehmet Serdar Güzel',
 		summary:
-			'Hybrid RF-ResNet50 (ResNet50 features + Random Forest classifier) outperformed both pure deep-learning and pure canonical-ML models for disease detection on an imbalanced dataset. McNemar’s test confirmed significant performance gains over ConvNeXt-T + AdamW.',
+			'Hybrid RF-ResNet50 (ResNet50 features + Random Forest classifier) outperformed both pure deep-learning and canonical-ML models on an imbalanced dataset.',
 	},
 ];
 
-// ---- Certifications ----
 const certifications = [
 	{
 		title: 'Concurrency in Go',
-		issuer: 'University of California, Irvine — Coursera',
+		issuer: 'UC Irvine — Coursera',
 		date: 'Dec 2023',
 		link: 'https://coursera.org/verify/UZD%20D%20P5EM58E3',
 	},
@@ -267,7 +260,6 @@ const certifications = [
 	{ title: 'AI For Everyone (I & II)', issuer: 'e-Government Certificate' },
 ];
 
-// ---- Languages (with full proficiency breakdown from CV) ----
 const languages = [
 	{ name: 'Turkish', level: 'Native' },
 	{
@@ -280,7 +272,6 @@ const languages = [
 	},
 ];
 
-// ---- Interests / Hobbies (from CV) ----
 const interests = [
 	'Open-source contributions',
 	'Swimming',
@@ -293,98 +284,88 @@ const visibleSocials = SOCIALS.filter((s) => s.label !== 'rss');
 
 <Layout
 	title="resume"
-	description="Resume of Berk Kırık — Senior AI Engineer. Five-plus years in production ML across fintech and healthcare."
-	subNavCategory="Resume"
-	subNavCta={{ label: 'Download PDF', href: SITE.resumePath }}
+	description="Resume of Berk Kırık — Senior AI Engineer. Five-plus years in production AI across fintech and healthcare."
 >
-	<!-- Hero (light) -->
-	<section class="tile tile-light" style="padding-bottom: var(--space-xxl);">
-		<div class="tile-content-narrow">
-			<h1 class="t-display-lg" style="text-align: center;">Berk Kırık.</h1>
-			<p class="t-lead-airy" style="text-align: center; margin-top: var(--space-md);">
-				Senior AI Engineer with 5+ years building production ML in microservices —
+	<div class="shell-wide">
+		<section class="page-hero">
+			<p class="eyebrow">/curriculum vitae</p>
+			<h1>Berk Kırık.</h1>
+			<p class="lead">
+				Senior AI Engineer with 5+ years building production AI in microservices —
 				LLMs, RAG, agentic AI, and the Kubernetes infrastructure underneath.
 				Background spans fintech and healthcare; trained originally as a
-				Biomedical Engineer.
+				biomedical engineer.
 			</p>
-
-			<p class="t-caption" style="text-align: center; margin-top: var(--space-lg); color: var(--ink-muted-48);">
-				Ankara, Türkiye{' '}
-				·{' '}
+			<p style="font-family: var(--font-mono); font-size: 12px; color: var(--ink-faint); text-transform: lowercase; margin-top: 16px;">
+				Ankara, Türkiye{' '}·{' '}
+				<a href={SITE.resumePath} target="_blank" rel="noopener">pdf</a>
+				{' · '}
 				{visibleSocials.map((s, i) => (
 					<>
 						{i > 0 && ' · '}
-						<a
-							href={s.href}
-							target={s.external ? '_blank' : undefined}
-							rel={s.external ? 'me noopener' : undefined}
-						>{s.label}</a>
+						<a href={s.href} target={s.external ? '_blank' : undefined} rel={s.external ? 'me noopener' : undefined}>{s.label}</a>
 					</>
 				))}
 			</p>
-		</div>
-	</section>
+		</section>
 
-	<!-- Experience (parchment) -->
-	<section id="experience" class="tile tile-parchment">
-		<div class="tile-content">
-			<h2 class="t-display-md" style="text-align: center; margin-bottom: var(--space-xxl);">Experience</h2>
-
-			<div class="cv-list">
+		<!-- EXPERIENCE -->
+		<section id="experience" style="margin-bottom: 80px;">
+			<h2 class="t-h2" style="margin-bottom: 24px;">Experience</h2>
+			<div class="cv-grid">
 				{experience.map((job) => (
-					<article class="cv-entry">
-						<p class="t-caption" style="color: var(--ink-muted-48); text-transform: uppercase; letter-spacing: 0.08em;">
-							{job.period} · {job.location}
-						</p>
-						<h3 class="role">{job.role}</h3>
-						<p class="where">
-							{job.url ? (
-								<a href={job.url} target="_blank" rel="noopener">{job.company}</a>
-							) : job.company}
-						</p>
-						{job.summary && <p class="summary">{job.summary}</p>}
-
-						<ul class="cv-bullets">
-							{job.bullets.map((b) => (
-								<li><strong>{b.heading}.</strong> {b.body}</li>
-							))}
-						</ul>
-					</article>
+					<div class="cv-row">
+						<div class="side">
+							<span class="period">{job.period}</span>
+							<span class="place">{job.location}</span>
+						</div>
+						<div class="body">
+							<div class="role">{job.role}</div>
+							<div class="where">
+								{job.url ? (
+									<a href={job.url} target="_blank" rel="noopener">{job.company}</a>
+								) : job.company}
+							</div>
+							{job.summary && <div class="summary">{job.summary}</div>}
+							<ul class="bullets">
+								{job.bullets.map((b) => (
+									<li><strong>{b.heading}.</strong> {b.body}</li>
+								))}
+							</ul>
+						</div>
+					</div>
 				))}
 			</div>
-		</div>
-	</section>
+		</section>
 
-	<!-- Education (light) -->
-	<section id="education" class="tile tile-light">
-		<div class="tile-content">
-			<h2 class="t-display-md" style="text-align: center; margin-bottom: var(--space-xxl);">Education</h2>
-
-			<div class="cv-list">
+		<!-- EDUCATION -->
+		<section id="education" style="margin-bottom: 80px;">
+			<h2 class="t-h2" style="margin-bottom: 24px;">Education</h2>
+			<div class="cv-grid">
 				{education.map((e) => (
-					<article class="cv-entry">
-						<p class="t-caption" style="color: var(--ink-muted-48); text-transform: uppercase; letter-spacing: 0.08em;">
-							{e.period} · {e.location}
-						</p>
-						<h3 class="role">{e.degree}</h3>
-						<p class="where">
-							{e.url ? (
-								<a href={e.url} target="_blank" rel="noopener">{e.school}</a>
-							) : e.school}
-						</p>
-						{e.note && <p class="summary">{e.note}</p>}
-					</article>
+					<div class="cv-row">
+						<div class="side">
+							<span class="period">{e.period}</span>
+							<span class="place">{e.location}</span>
+						</div>
+						<div class="body">
+							<div class="role">{e.degree}</div>
+							<div class="where">
+								{e.url ? (
+									<a href={e.url} target="_blank" rel="noopener">{e.school}</a>
+								) : e.school}
+							</div>
+							{e.note && <div class="summary">{e.note}</div>}
+						</div>
+					</div>
 				))}
 			</div>
-		</div>
-	</section>
+		</section>
 
-	<!-- Skills (parchment) -->
-	<section id="skills" class="tile tile-parchment">
-		<div class="tile-content">
-			<h2 class="t-display-md" style="text-align: center; margin-bottom: var(--space-xxl);">Skills</h2>
-
-			<div class="skills-list">
+		<!-- SKILLS -->
+		<section id="skills" style="margin-bottom: 80px;">
+			<h2 class="t-h2" style="margin-bottom: 24px;">Skills</h2>
+			<div class="skills-grid">
 				{Object.entries(skills).map(([group, items]) => (
 					<div class="skills-row">
 						<span class="group">{group}</span>
@@ -392,101 +373,75 @@ const visibleSocials = SOCIALS.filter((s) => s.label !== 'rss');
 					</div>
 				))}
 			</div>
-		</div>
-	</section>
+		</section>
 
-	<!-- Publications (dark) -->
-	<section id="publications" class="tile tile-dark">
-		<div class="tile-content">
-			<h2 class="t-display-md" style="text-align: center; margin-bottom: var(--space-xxl); color: var(--body-on-dark);">
-				Publications
-			</h2>
-
-			<div class="cv-list">
+		<!-- PUBLICATIONS -->
+		<section id="publications" style="margin-bottom: 80px;">
+			<h2 class="t-h2" style="margin-bottom: 24px;">Publications</h2>
+			<div class="cv-grid">
 				{publications.map((p) => (
-					<article class="cv-entry">
-						<p class="t-caption" style="color: var(--body-muted); text-transform: uppercase; letter-spacing: 0.08em;">
-							{p.year} · {p.venue}
-						</p>
-						<h3 class="role" style="color: var(--body-on-dark);">
-							{p.link ? (
-								<a href={p.link} target="_blank" rel="noopener" style="color: var(--primary-on-dark);">{p.title}</a>
-							) : p.title}
-						</h3>
-						<p class="where" style="color: var(--body-muted);">{p.authors}</p>
-						<p class="summary" style="color: var(--body-on-dark);">{p.summary}</p>
-					</article>
+					<div class="cv-row">
+						<div class="side">
+							<span class="period">{p.year}</span>
+							<span class="place">{p.venue}</span>
+						</div>
+						<div class="body">
+							<div class="role">
+								{p.link ? (
+									<a href={p.link} target="_blank" rel="noopener">{p.title}</a>
+								) : p.title}
+							</div>
+							<div class="where">{p.authors}</div>
+							{p.summary && <div class="summary">{p.summary}</div>}
+						</div>
+					</div>
 				))}
 			</div>
-
-			<p class="t-caption" style="color: var(--body-muted); text-align: center; margin-top: var(--space-xxl);">
-				Full record on{' '}
-				<a href="https://orcid.org/0009-0004-5045-3048" target="_blank" rel="noopener" style="color: var(--primary-on-dark);">ORCID</a>.
+			<p style="font-family: var(--font-serif); font-style: italic; font-size: 15px; color: var(--ink-muted); margin-top: 16px;">
+				Full record on <a href="https://orcid.org/0009-0004-5045-3048" target="_blank" rel="noopener">ORCID</a>.
 			</p>
-		</div>
-	</section>
+		</section>
 
-	<!-- Certifications + Languages + Interests (parchment) -->
-	<section class="tile tile-parchment">
-		<div class="tile-content">
-			<div style="display: grid; grid-template-columns: 1fr; gap: var(--space-section);">
-
-				<!-- Certifications -->
-				<div id="certifications">
-					<h2 class="t-display-md" style="margin-bottom: var(--space-lg);">Certifications</h2>
-					<ul class="skills-list">
-						{certifications.map((c) => (
-							<li class="skills-row">
-								<span class="group">{c.date ?? ''}</span>
-								<span class="items">
-									{c.link ? (
-										<a href={c.link} target="_blank" rel="noopener">{c.title}</a>
-									) : (
-										<strong>{c.title}</strong>
-									)}
-									{' — '}
-									<span style="color: var(--ink-muted-80);">{c.issuer}</span>
-								</span>
-							</li>
-						))}
-					</ul>
-				</div>
-
-				<!-- Languages -->
-				<div id="languages">
-					<h2 class="t-display-md" style="margin-bottom: var(--space-lg);">Languages</h2>
-					<ul class="skills-list">
-						{languages.map((l) => (
-							<li class="skills-row">
-								<span class="group">{l.name}</span>
-								<span class="items">{l.level}</span>
-							</li>
-						))}
-					</ul>
-				</div>
-
-				<!-- Interests -->
-				<div id="interests">
-					<h2 class="t-display-md" style="margin-bottom: var(--space-lg);">Interests</h2>
-					<p class="t-body" style="color: var(--ink-muted-80);">
-						{interests.join(' · ')}
-					</p>
-				</div>
+		<!-- CERTIFICATIONS -->
+		<section id="certifications" style="margin-bottom: 80px;">
+			<h2 class="t-h2" style="margin-bottom: 24px;">Certifications</h2>
+			<div class="skills-grid">
+				{certifications.map((c) => (
+					<div class="skills-row">
+						<span class="group">{c.date ?? ''}</span>
+						<span class="items">
+							{c.link ? (
+								<a href={c.link} target="_blank" rel="noopener"><strong>{c.title}</strong></a>
+							) : (
+								<strong>{c.title}</strong>
+							)}
+							{' — '}
+							<em>{c.issuer}</em>
+						</span>
+					</div>
+				))}
 			</div>
-		</div>
-	</section>
+		</section>
 
-	<!-- Closing CTA (dark-2) -->
-	<section class="tile tile-dark-2">
-		<div class="tile-stack">
-			<h2 class="t-display-lg" style="color: var(--body-on-dark);">Get in touch.</h2>
-			<p class="t-lead-airy" style="color: var(--body-muted);">
-				Best reached by email. PDF version of the full resume is one click away.
+		<!-- LANGUAGES -->
+		<section id="languages" style="margin-bottom: 80px;">
+			<h2 class="t-h2" style="margin-bottom: 24px;">Languages</h2>
+			<div class="skills-grid">
+				{languages.map((l) => (
+					<div class="skills-row">
+						<span class="group">{l.name}</span>
+						<span class="items">{l.level}</span>
+					</div>
+				))}
+			</div>
+		</section>
+
+		<!-- INTERESTS -->
+		<section id="interests">
+			<h2 class="t-h2" style="margin-bottom: 16px;">Interests</h2>
+			<p class="t-body" style="color: var(--ink-soft);">
+				{interests.join(' · ')}
 			</p>
-			<div class="ctas">
-				<a class="btn btn-primary" href="mailto:berk.kirik@outlook.com">Email me</a>
-				<a class="btn btn-secondary-pill" href={SITE.resumePath} target="_blank" rel="noopener">Download PDF</a>
-			</div>
-		</div>
-	</section>
+		</section>
+	</div>
 </Layout>

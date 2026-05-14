@@ -1,7 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
-	<rect width="32" height="32" rx="6" fill="#1d1d1f"/>
+	<rect width="32" height="32" rx="4" fill="#f6f1e7"/>
 	<text x="16" y="22" text-anchor="middle"
-		font-family="SF Pro Display, -apple-system, system-ui, Inter, sans-serif"
-		font-size="17" font-weight="600" letter-spacing="-0.5"
-		fill="#ffffff">BK</text>
+		font-family="Newsreader, Iowan Old Style, Charter, Georgia, serif"
+		font-size="18" font-style="italic" font-weight="500"
+		fill="#161513">BK</text>
 </svg>

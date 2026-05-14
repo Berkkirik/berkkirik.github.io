@@ -3,18 +3,16 @@ import Layout from '../layouts/Layout.astro';
 ---
 
 <Layout title="404" description="Page not found.">
-	<section class="tile tile-light">
-		<div class="tile-stack">
-			<p class="t-caption" style="text-transform: uppercase; letter-spacing: 0.08em;">
-				404 — not found
-			</p>
-			<h1 class="t-display-lg">This page doesn't exist.</h1>
-			<p class="t-lead-airy">
+	<div class="shell">
+		<section class="page-hero">
+			<p class="eyebrow">404 / not found</p>
+			<h1>This page doesn't exist.</h1>
+			<p class="lead">
 				Maybe a stale link, maybe a typo. Either way, there's nothing here.
 			</p>
-			<div class="ctas">
-				<a class="btn btn-primary" href="/">Back home</a>
-			</div>
-		</div>
-	</section>
+			<p style="margin-top: 24px;">
+				<a href="/">← back home</a>
+			</p>
+		</section>
+	</div>
 </Layout>

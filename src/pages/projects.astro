@@ -6,168 +6,120 @@ interface Project {
 	attribution?: string;
 	year?: string;
 	description: string;
-	highlights?: string[];
 	tags?: string[];
 }
 
-// Selected work, newest first. Mostly proprietary builds — descriptions
-// avoid confidential details. Open-source side projects live on GitHub.
 const projects: Project[] = [
 	{
 		title: 'Enterprise RAG System',
 		attribution: 'Etiya',
 		year: '2025—',
 		description:
-			'Production RAG pipeline over 500K+ documents with hybrid search (vector + BM25), advanced chunking, HyDE query rewriting, cross-encoder re-ranking, and RAGAS evaluation.',
-		highlights: [
-			'92% recall@10',
-			'45% fewer hallucinations',
-			'sub-3s responses',
-			'20+ file formats',
-		],
-		tags: ['rag', 'llm', 'hybrid-search', 'faiss', 'ragas'],
+			'Production RAG over 500K+ documents — hybrid search (vector + BM25), HyDE rewriting, cross-encoder re-ranking, RAGAS evaluation. 92% recall@10, sub-3s responses.',
+		tags: ['rag', 'llm', 'faiss', 'ragas'],
 	},
 	{
 		title: 'Agentic AI Platform',
 		attribution: 'Etiya',
 		year: '2025—',
 		description:
-			'Multi-agent orchestration with LangGraph and CrewAI using ReAct and Plan-and-Execute patterns across 25+ tools. Includes autonomous code-review agents and a researcher / analyst / writer / critic collaboration model with episodic and knowledge-graph memory and LangSmith tracing.',
-		highlights: ['99.2% task completion', 'guardrail integration'],
-		tags: ['agents', 'langgraph', 'crewai', 'langsmith', 'react'],
+			'Multi-agent orchestration with LangGraph + CrewAI (ReAct, Plan-and-Execute) across 25+ tools, with episodic and knowledge-graph memory, LangSmith tracing. 99.2% task completion.',
+		tags: ['agents', 'langgraph', 'crewai', 'langsmith'],
 	},
 	{
 		title: 'LLM Guardrail System',
 		attribution: 'Etiya',
 		year: '2025—',
 		description:
-			'Multi-layer guardrails (Guardrails AI + NeMo Guardrails + custom) with PII detection across 15+ categories, SHAP-based explainability, and a full-stack monitoring app (React / FastAPI / PostgreSQL). Redis caching for sub-50ms response times, Prometheus + Grafana observability, all on a microservices architecture.',
-		highlights: [
-			'89.2% harmful blocked',
-			'97% PII detection',
-			'5K+ concurrent requests',
-		],
-		tags: ['guardrails', 'llm-safety', 'pii', 'shap', 'redis'],
+			'Multi-layer guardrails (Guardrails AI + NeMo + custom) with PII detection, SHAP explainability, monitoring app (React / FastAPI / PostgreSQL). 89.2% blocked, 5K+ concurrent.',
+		tags: ['guardrails', 'pii', 'shap', 'redis'],
 	},
 	{
 		title: 'Multi-Tenant NER Platform',
 		attribution: 'Etiya',
 		year: '2025—',
 		description:
-			'Scalable Named Entity Recognition serving multiple enterprise clients with tenant-specific isolation and automated model selection based on SLAs.',
-		highlights: ['sub-200ms inference', 'per-tenant isolation'],
-		tags: ['nlp', 'ner', 'multi-tenant', 'inference'],
+			'Scalable NER serving multiple enterprise clients with tenant-specific isolation and SLA-based model selection. Sub-200ms inference.',
+		tags: ['nlp', 'ner', 'multi-tenant'],
 	},
 	{
-		title: 'Code-Generation LLM Fine-tuning',
+		title: 'Code-Generation Fine-tuning',
 		attribution: 'Etiya',
 		year: '2025',
 		description:
-			'LoRA fine-tuning of large code models on Hugging Face for domain-specific completion, with A/B testing for seamless adapter swapping.',
-		highlights: [
-			'+40% accuracy',
-			'−90% training cost',
-			'0.1% of params trained',
-		],
-		tags: ['llm', 'fine-tuning', 'lora', 'huggingface', 'pytorch'],
+			'LoRA fine-tuning of large code models on Hugging Face for domain-specific completion. +40% accuracy, −90% training cost, A/B adapter swapping.',
+		tags: ['lora', 'huggingface', 'pytorch'],
 	},
 	{
-		title: 'ISO 20022 / SWIFT MT-MX NLP Pipeline',
+		title: 'ISO 20022 / SWIFT NLP Pipeline',
 		attribution: 'Im-Par · Frankfurt',
 		year: '2023—2025',
 		description:
-			'NLP pipelines in Python to validate and auto-generate compliant financial messages (ISO 20022, SWIFT MT/MX) — reducing manual intervention in regulated workflows.',
-		tags: ['nlp', 'fintech', 'compliance', 'iso-20022', 'swift'],
+			'NLP pipelines in Python to validate and auto-generate compliant financial messages (ISO 20022, SWIFT MT/MX) for regulated workflows.',
+		tags: ['nlp', 'fintech', 'compliance'],
 	},
 	{
 		title: 'Graph-Based Fraud Detection',
 		attribution: 'Im-Par · Frankfurt',
 		year: '2023—2025',
 		description:
-			'Graph systems on Neo4j + GraphQL over large-scale financial datasets — link prediction, clustering, and anomaly detection combined with Pandas/Spark mining for real-time signals.',
-		tags: ['graphs', 'neo4j', 'fraud-detection', 'anomaly-detection', 'spark'],
+			'Graph systems on Neo4j + GraphQL over large financial datasets — link prediction, clustering, anomaly detection, with Pandas/Spark mining for real-time signals.',
+		tags: ['neo4j', 'fraud-detection', 'spark'],
 	},
 	{
 		title: 'Banking-Platform Microservices',
 		attribution: 'Im-Par · Frankfurt',
 		year: '2023—2025',
 		description:
-			'Cloud-native banking platform: Golang for performance-critical services, Python/Django for AI orchestration. gRPC internally, REST externally, KrakenD as API gateway, Keycloak for RBAC + ABAC. Custom Kubernetes operators in Golang with GitOps CI/CD.',
-		tags: ['golang', 'kubernetes', 'grpc', 'krakend', 'keycloak'],
+			'Cloud-native banking platform: Golang for performance-critical services, Python / Django for AI orchestration. gRPC + REST, KrakenD gateway, Keycloak RBAC/ABAC, custom Kubernetes operators.',
+		tags: ['golang', 'kubernetes', 'krakend'],
 	},
 	{
 		title: 'Healthcare Activity Recognition',
 		attribution: 'Tiga · Ankara',
 		year: '2021—2023',
 		description:
-			'Edge-to-cloud sensor-fusion pipeline (ESP-32 + Raspberry Pi) for real-time activity classification. PCA / FFT / LDA preprocessing, ensemble of Decision Trees, SVM, Random Forest, CNNs, and XGBoost — deployed for on-device mobile inference.',
-		tags: ['healthcare', 'edge-ml', 'sensor-fusion', 'cnn', 'xgboost'],
+			'Edge-to-cloud sensor-fusion pipeline (ESP-32 + Raspberry Pi). PCA / FFT / LDA preprocessing, ensemble of classical ML + CNN models, on-device mobile inference.',
+		tags: ['edge-ml', 'sensor-fusion', 'cnn'],
 	},
 ];
 ---
 
 <Layout
 	title="projects"
-	description="Selected production ML and engineering work by Berk Kırık."
-	subNavCategory="Projects"
-	subNavCta={{ label: 'Get in touch', href: 'mailto:berk.kirik@outlook.com' }}
+	description="Selected production AI and engineering work by Berk Kırık."
 >
-	<!-- Hero tile (light) -->
-	<section class="tile tile-light">
-		<div class="tile-stack">
-			<h1 class="t-display-lg">Selected work.</h1>
-			<p class="t-lead-airy">
-				Most of this is proprietary, so descriptions are intentionally light on
+	<div class="shell-wide">
+		<section class="page-hero">
+			<p class="eyebrow">/projects</p>
+			<h1>Selected work.</h1>
+			<p class="lead">
+				Most of this is proprietary, so descriptions are deliberately light on
 				internal detail. Open-source side projects live on{' '}
 				<a href="https://github.com/Berkkirik" target="_blank" rel="noopener">GitHub</a>;
 				peer-reviewed work is on the <a href="/resume/#publications">resume</a>.
 			</p>
-		</div>
-	</section>
+		</section>
 
-	<!-- Project grid (parchment) -->
-	<section class="tile tile-parchment">
-		<div class="tile-inner">
-			<div class="utility-grid">
+		<section>
+			<ol class="work-grid" reversed style="list-style: none;">
 				{projects.map((p) => (
-					<article class="utility-card">
-						<span class="meta">
-							{p.year}{p.year && p.attribution ? ' · ' : ''}{p.attribution}
-						</span>
-						<h2 class="title">{p.title}</h2>
-						<p class="description">{p.description}</p>
-
-						{p.highlights && p.highlights.length > 0 && (
-							<div class="tags">
-								{p.highlights.map((h) => <span class="tag" style="background: var(--canvas); color: var(--ink); border: 1px solid var(--hairline);">{h}</span>)}
-							</div>
-						)}
-
+					<li class="work-item">
+						<div class="meta">
+							<span>{p.year}</span>
+							{p.attribution && <span class="dot">·</span>}
+							{p.attribution && <span>{p.attribution}</span>}
+						</div>
+						<h3>{p.title}</h3>
+						<p>{p.description}</p>
 						{p.tags && p.tags.length > 0 && (
 							<div class="tags">
 								{p.tags.map((t) => <span class="tag">{t}</span>)}
 							</div>
 						)}
-					</article>
+					</li>
 				))}
-			</div>
-		</div>
-	</section>
-
-	<!-- Closing CTA tile (dark-2) -->
-	<section class="tile tile-dark-2">
-		<div class="tile-stack">
-			<h2 class="t-display-lg" style="color: var(--body-on-dark);">
-				Want to talk about a project?
-			</h2>
-			<p class="t-lead-airy" style="color: var(--body-muted);">
-				Especially where ML systems meet biology, healthcare, or regulated
-				domains.
-			</p>
-			<div class="ctas">
-				<a class="btn btn-primary" href="mailto:berk.kirik@outlook.com">Email me</a>
-				<a class="btn btn-secondary-pill" href="/resume/">Read the resume</a>
-			</div>
-		</div>
-	</section>
+			</ol>
+		</section>
+	</div>
 </Layout>

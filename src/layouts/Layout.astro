@@ -5,19 +5,9 @@ import { SITE, NAV, SOCIALS } from '../config';
 interface Props {
 	title?: string;
 	description?: string;
-	/** Sub-nav category label, shown in the frosted strip under the global nav. */
-	subNavCategory?: string;
-	/** Optional sub-nav primary CTA shown right-aligned in the frosted strip. */
-	subNavCta?: { label: string; href: string };
 }
 
-const {
-	title,
-	description = SITE.description,
-	subNavCategory,
-	subNavCta,
-} = Astro.props;
-
+const { title, description = SITE.description } = Astro.props;
 const fullTitle = title ? `${title} — ${SITE.title}` : SITE.title;
 const canonical = new URL(Astro.url.pathname, Astro.site).toString();
 const currentPath = Astro.url.pathname.replace(/\/$/, '') || '/';
@@ -28,9 +18,6 @@ function isCurrent(href: string): boolean {
 	return currentPath === normalized || currentPath.startsWith(normalized + '/');
 }
 
-const navUtility = SOCIALS.filter(
-	(s) => s.label === 'github' || s.label === 'linkedin' || s.label === 'email',
-);
 const footerSocial = SOCIALS.filter((s) => s.label !== 'rss');
 ---
 
@@ -59,96 +46,54 @@ const footerSocial = SOCIALS.filter((s) => s.label !== 'rss');
 		<meta name="twitter:title" content={fullTitle} />
 		<meta name="twitter:description" content={description} />
 
-		<meta name="theme-color" content="#000000" />
+		<meta name="theme-color" content="#f6f1e7" />
 	</head>
 	<body>
 		<a class="sr-only" href="#main">Skip to content</a>
 
-		<header class="global-nav" role="banner">
-			<div class="global-nav-inner">
-				<a class="brand-mark" href="/" aria-label={`${SITE.author} — home`}>BK</a>
+		<header class="masthead" role="banner">
+			<div class="masthead-inner">
+				<a class="masthead-brand" href="/" aria-label={`${SITE.author} — home`}>
+					<span>{SITE.author}</span>
+					<span class="masthead-version">/ v1</span>
+				</a>
 
-				<nav class="global-nav-links" aria-label="Primary">
-					{NAV.map((item) => (
+				<nav class="masthead-nav" aria-label="Primary">
+					{NAV.filter((item) => item.href !== '/').map((item) => (
 						<a
 							href={item.href}
 							aria-current={isCurrent(item.href) ? 'page' : undefined}
 						>{item.label}</a>
 					))}
 				</nav>
-
-				<div class="global-nav-utility" aria-label="Contact">
-					{navUtility.map((s) => (
-						<a
-							href={s.href}
-							target={s.external ? '_blank' : undefined}
-							rel={s.external ? 'me noopener' : undefined}
-						>{s.label}</a>
-					))}
-				</div>
 			</div>
 		</header>
-
-		{subNavCategory && (
-			<div class="sub-nav" role="navigation" aria-label="Section">
-				<div class="sub-nav-inner">
-					<span class="sub-nav-category">{subNavCategory}</span>
-					<div class="sub-nav-links">
-						{subNavCta && (
-							<a
-								class="btn btn-primary"
-								href={subNavCta.href}
-								target={subNavCta.href.startsWith('http') || subNavCta.href.startsWith('mailto:') ? '_blank' : undefined}
-								rel={subNavCta.href.startsWith('http') ? 'noopener' : undefined}
-							>{subNavCta.label}</a>
-						)}
-					</div>
-				</div>
-			</div>
-		)}
 
 		<main id="main">
 			<slot />
 		</main>
 
-		<footer class="site-footer" role="contentinfo">
-			<div class="site-footer-inner">
-				<div class="site-footer-grid">
-					<div class="site-footer-col">
-						<h4>Pages</h4>
-						<ul>
-							{NAV.map((item) => <li><a href={item.href}>{item.label}</a></li>)}
-						</ul>
-					</div>
-					<div class="site-footer-col">
-						<h4>Around the web</h4>
-						<ul>
-							{footerSocial.map((s) => (
-								<li>
-									<a
-										href={s.href}
-										target={s.external ? '_blank' : undefined}
-										rel={s.external ? 'me noopener' : undefined}
-									>{s.label}</a>
-								</li>
-							))}
-							<li><a href="/rss.xml">rss</a></li>
-						</ul>
-					</div>
-					<div class="site-footer-col">
-						<h4>Resume</h4>
-						<ul>
-							<li><a href="/resume/">on this site</a></li>
-							<li><a href={SITE.resumePath} target="_blank" rel="noopener">PDF</a></li>
-							<li><a href="https://orcid.org/0009-0004-5045-3048" target="_blank" rel="me noopener">ORCID</a></li>
-						</ul>
-					</div>
-				</div>
+		<footer class="colophon" role="contentinfo">
+			<div class="colophon-inner">
+				<p>
+					<em>Berk Kırık</em> is a Senior AI Engineer based in Ankara, Türkiye.
+					Reachable by <a href="mailto:berk.kirik@outlook.com">email</a> and on
+					{' '}{footerSocial.filter((s) => s.label !== 'email').map((s, i, arr) => (
+						<>
+							<a
+								href={s.href}
+								target={s.external ? '_blank' : undefined}
+								rel={s.external ? 'me noopener' : undefined}
+							>{s.label}</a>{i < arr.length - 1 ? ', ' : ''}
+						</>
+					))}.
+				</p>
 
-				<div class="site-footer-legal">
-					<span>&copy; {new Date().getFullYear()} {SITE.author}</span>
-					<span>Ankara, Türkiye</span>
-					<span>Built with Astro · hosted on GitHub Pages</span>
+				<div class="legal">
+					<span>© {new Date().getFullYear()} Berk Kırık</span>
+					<span>Set in Newsreader</span>
+					<span>Built with Astro · GitHub Pages</span>
+					<a href="/rss.xml" class="no-underline" style="font-style: normal;">rss</a>
 				</div>
 			</div>
 		</footer>

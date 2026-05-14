@@ -4,73 +4,80 @@ import { SITE } from '../config';
 ---
 
 <Layout title="" description={SITE.description}>
-	<!-- Tile 1 — Hero (light) -->
-	<section class="tile tile-light">
-		<div class="tile-stack">
-			<h1 class="t-hero">Berk Kırık.</h1>
+	<article class="shell">
+		<header class="stack" style="gap: 24px; margin-bottom: 48px;">
+			<p class="t-meta">README</p>
+			<h1 class="t-display">
+				<em>Berk Kırık</em> is a Senior AI Engineer&nbsp;in Türkiye.
+			</h1>
+		</header>
+
+		<div class="stack" style="gap: 24px;">
 			<p class="t-lead">
-				Senior AI Engineer. Five years building production ML in microservices —
-				LLMs, RAG, agentic AI, and the Kubernetes infrastructure underneath.
+				Five years building production AI systems — LLMs, RAG, agentic
+				platforms, multi-tenant NER, and the Kubernetes infrastructure
+				underneath. Currently at <a href="https://www.etiya.com/" target="_blank" rel="noopener">Etiya</a>;
+				previously at <a href="https://im-par.de/" target="_blank" rel="noopener">Im-Par</a>
+				in Frankfurt and <a href="https://www.tigahealth.com/" target="_blank" rel="noopener">Tiga</a>
+				in Ankara.
 			</p>
-			<div class="ctas">
-				<a class="btn btn-primary" href="/projects/">View work</a>
-				<a class="btn btn-secondary-pill" href="mailto:berk.kirik@outlook.com">Get in touch</a>
-			</div>
-		</div>
-	</section>
 
-	<!-- Tile 2 — Currently (dark) -->
-	<section class="tile tile-dark">
-		<div class="tile-stack">
-			<p class="t-caption" style="color: var(--body-muted); text-transform: uppercase; letter-spacing: 0.08em;">
-				Currently
+			<p class="t-body">
+				I trained originally as a <em>biomedical engineer</em> — BSc at Ankara
+				University — which taught me how signals from a body become decisions a
+				system makes. That foundation in signal processing, sensor systems and
+				biological data still sits underneath the work I do at the AI end of
+				software engineering. I'm now back at Ankara University for an MSc in
+				Computer Engineering, formal complement to the engineering work.
 			</p>
-			<h2 class="t-display-lg" style="color: var(--body-on-dark);">
-				Production ML at <a href="https://www.etiya.com/" target="_blank" rel="noopener" style="color: var(--primary-on-dark);">Etiya</a>.
-			</h2>
-			<p class="t-lead-airy" style="color: var(--body-muted);">
-				LoRA fine-tuning. Multi-tenant NER at sub-200ms. Enterprise RAG over 500K
-				documents. Agentic platforms with LangGraph and CrewAI. The unglamorous
-				infra that makes them ship.
-			</p>
-			<div class="ctas">
-				<a class="btn btn-primary" href="/resume/#experience">See the details</a>
-			</div>
-		</div>
-	</section>
 
-	<!-- Tile 3 — BE → AI bridge (parchment) -->
-	<section class="tile tile-parchment">
-		<div class="tile-stack">
-			<p class="t-caption" style="text-transform: uppercase; letter-spacing: 0.08em;">
-				Background
+			<p class="t-body">
+				This site is, in roughly equal parts, a place to keep my work in one
+				place, to write down what I learn from production AI, and to read more
+				slowly than the internet usually allows. There are four corners of it:
 			</p>
-			<h2 class="t-display-lg">Software Engineer.</h2>
-			<p class="t-lead-airy">
-				BSc in Biomedical Engineering at Ankara University taught me how
-				signals from a body become decisions a system makes — and that
-				foundation still sits underneath the work I do, from sensor-fusion
-				healthcare AI at <a href="https://www.tigahealth.com/" target="_blank" rel="noopener">Tiga</a>
-				to ongoing research on biological classification.
-			</p>
-			<div class="ctas">
-				<a class="btn btn-secondary-pill" href="/resume/#education">Education</a>
-				<a class="btn btn-secondary-pill" href="/resume/#publications">Publications</a>
-			</div>
-		</div>
-	</section>
 
-	<!-- Closing tile (light) -->
-	<section class="tile tile-light">
-		<div class="tile-stack">
-			<h2 class="t-display-lg">Get in touch.</h2>
-			<p class="t-lead-airy">
-				Best reached by email. The full CV is one click away.
+			<ol class="numbered" style="margin-top: 24px;">
+				<li>
+					<a class="title" href="/projects/">Projects</a>
+					<span class="date">work</span>
+					<span class="annotation">
+						Selected production builds — RAG, agentic AI, guardrails, NER,
+						fraud detection, healthcare sensor fusion. Mostly proprietary; descriptions
+						are deliberately light on internal detail.
+					</span>
+				</li>
+				<li>
+					<a class="title" href="/blog/">Notes</a>
+					<span class="date">writing</span>
+					<span class="annotation">
+						Occasional short essays — production AI, LLMs, agents, and the
+						unglamorous infrastructure around them.
+					</span>
+				</li>
+				<li>
+					<a class="title" href="/resume/">Curriculum vitae</a>
+					<span class="date">on-site</span>
+					<span class="annotation">
+						Full experience, education, skills, publications, and languages —
+						mirrored from the PDF below.
+					</span>
+				</li>
+				<li>
+					<a class="title" href={SITE.resumePath} target="_blank" rel="noopener">CV (PDF)</a>
+					<span class="date">download</span>
+					<span class="annotation">
+						The authoritative source.
+					</span>
+				</li>
+			</ol>
+
+			<p class="t-body" style="margin-top: 48px;">
+				Reachable by <a href="mailto:berk.kirik@outlook.com">email</a>,
+				on <a href="https://github.com/Berkkirik" target="_blank" rel="me noopener">GitHub</a>,
+				and on <a href="https://www.linkedin.com/in/berkkirik/" target="_blank" rel="me noopener">LinkedIn</a>.
+				Academic record on <a href="https://orcid.org/0009-0004-5045-3048" target="_blank" rel="me noopener">ORCID</a>.
 			</p>
-			<div class="ctas">
-				<a class="btn btn-primary" href="mailto:berk.kirik@outlook.com">Email me</a>
-				<a class="btn btn-secondary-pill" href={SITE.resumePath} target="_blank" rel="noopener">Download CV</a>
-			</div>
 		</div>
-	</section>
+	</article>
 </Layout>

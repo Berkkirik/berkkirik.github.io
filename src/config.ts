@@ -8,7 +8,7 @@ export const SITE = {
 	brand: 'berk@kirik:~$',
 	author: 'Berk Kırık',
 	description:
-		'Senior AI Engineer building production ML systems — LLM fine-tuning, RAG, NER, agentic AI, and ML infrastructure on Kubernetes.',
+		'Senior AI Engineer building production AI systems — LLM fine-tuning, RAG, NER, agentic AI, and the Kubernetes infrastructure underneath.',
 	url: 'https://berkkirik.github.io',
 	// Path to the resume PDF inside /public.
 	resumePath: '/berk_kirik_cv.pdf',

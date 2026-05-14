@@ -11,48 +11,38 @@ const fmt = (d: Date) => d.toISOString().slice(0, 10);
 
 <Layout
 	title="blog"
-	description="Writing by Berk Kırık on production ML, LLMs, agents, and the unglamorous infra around them."
-	subNavCategory="Blog"
-	subNavCta={{ label: 'Subscribe (RSS)', href: '/rss.xml' }}
+	description="Writing by Berk Kırık on production AI, LLMs, agents, and the unglamorous infra around them."
 >
-	<!-- Hero tile (light) -->
-	<section class="tile tile-light">
-		<div class="tile-stack">
-			<h1 class="t-display-lg">Writing.</h1>
-			<p class="t-lead-airy">
-				Short notes from production: LLMs, RAG, agents, the things that break and why.
-				Subscribe via <a href="/rss.xml">RSS</a>.
+	<div class="shell">
+		<section class="page-hero">
+			<p class="eyebrow">/notes</p>
+			<h1>Notes.</h1>
+			<p class="lead">
+				Short essays from production: LLMs, RAG, agents, and the unglamorous
+				infra around them. Subscribe via <a href="/rss.xml">RSS</a>.
 			</p>
-		</div>
-	</section>
+		</section>
 
-	<!-- Post list tile (parchment) -->
-	<section class="tile tile-parchment" style="padding-top: 0; padding-bottom: var(--space-section);">
-		<div class="tile-content-narrow">
+		<section>
 			{posts.length === 0 ? (
-				<p class="t-lead-airy" style="text-align: center;">No posts yet.</p>
+				<p style="font-style: italic; color: var(--ink-muted); text-align: center; padding: 48px 0;">
+					No posts yet.
+				</p>
 			) : (
-				<div class="post-list">
+				<div class="post-table">
 					{posts.map((post) => (
-						<a class="post-row" href={`/blog/${post.id}/`}>
-							<time class="date" datetime={post.data.pubDate.toISOString()}>{fmt(post.data.pubDate)}</time>
-							<span class="title">{post.data.title}</span>
+						<a class="post-row-link" href={`/blog/${post.id}/`}>
+							<time class="post-date" datetime={post.data.pubDate.toISOString()}>{fmt(post.data.pubDate)}</time>
+							<div class="post-title-block">
+								<span class="post-title">{post.data.title}</span>
+								{post.data.description && (
+									<span class="post-desc">{post.data.description}</span>
+								)}
+							</div>
 						</a>
 					))}
 				</div>
 			)}
-		</div>
-	</section>
+		</section>
+	</div>
 </Layout>
-
-<style>
-	a.post-row {
-		text-decoration: none;
-		color: inherit;
-	}
-
-	a.post-row:hover .title {
-		text-decoration: underline;
-		text-underline-offset: 3px;
-	}
-</style>

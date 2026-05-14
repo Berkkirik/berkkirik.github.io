@@ -65,8 +65,22 @@ html {
 
 html,
 body {
-	background: var(--paper);
+	background-color: var(--paper);
 	color: var(--ink);
+}
+
+/* Faint ruled-paper lines, ~28px apart (≈ body line-height at 18px / 1.55).
+   Lives on <body> so it scrolls with the content. Designed to be barely
+   visible — present enough to feel like writing on lined paper, faint
+   enough to never compete with the type. */
+body {
+	background-image: repeating-linear-gradient(
+		to bottom,
+		transparent 0,
+		transparent 27px,
+		rgba(150, 130, 100, 0.13) 27px,
+		rgba(150, 130, 100, 0.13) 28px
+	);
 }
 
 body {
@@ -1070,6 +1084,7 @@ section + section,
 	html,
 	body {
 		background: #ffffff;
+		background-image: none !important;
 		color: #000000;
 		font-size: 11pt;
 	}

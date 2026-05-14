@@ -19,6 +19,7 @@ export const NAV: ReadonlyArray<{ href: string; label: string }> = [
 	{ href: '/projects/', label: 'projects' },
 	{ href: '/blog/', label: 'blog' },
 	{ href: '/resume/', label: 'resume' },
+	{ href: '/now/', label: 'now' },
 ];
 
 export const SOCIALS: ReadonlyArray<{

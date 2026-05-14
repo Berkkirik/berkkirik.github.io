@@ -1,0 +1,81 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+// Edit the constant below and re-deploy whenever you want to update /now.
+// The /now page is a convention from https://nownownow.com — a single page
+// that answers "what are you doing right now?" updated periodically.
+const lastUpdated = '2026-05-14';
+
+const sections = [
+	{
+		heading: 'Working on',
+		items: [
+			'Senior AI Engineer at Etiya — code-generation LoRA fine-tuning, multi-tenant NER, the agentic-AI platform on LangGraph + CrewAI, and an enterprise RAG pipeline over 500K+ documents.',
+			'A guardrail system layered over the agentic platform — PII detection, SHAP explainability, and a React / FastAPI / PostgreSQL monitoring app on top.',
+		],
+	},
+	{
+		heading: 'Studying',
+		items: [
+			'MSc in Computer Engineering at Ankara University (started Feb 2026).',
+			'Following research on Kolmogorov–Arnold networks and how the spline-based functional transformations behave outside biological-classification settings.',
+		],
+	},
+	{
+		heading: 'Writing',
+		items: [
+			'Notes from production: see the latest at /blog/. Slowly.',
+		],
+	},
+	{
+		heading: 'Reading',
+		items: [
+			'Recent papers on KANs, RAG evaluation (RAGAS), and multi-agent collaboration patterns.',
+			'Currently re-reading something old, probably.',
+		],
+	},
+	{
+		heading: 'Living',
+		items: [
+			'Based in Ankara, Türkiye.',
+			'Off-hours: swimming, basketball, chess puzzles, and contributing to open source when the schedule allows.',
+		],
+	},
+];
+---
+
+<Layout
+	title="now"
+	description="What Berk Kırık is working on, studying, reading, and writing right now."
+>
+	<article class="shell">
+		<header class="stack" style="gap: 16px; margin-bottom: 48px;">
+			<p class="t-meta">/now</p>
+			<h1 class="t-display">What I'm doing <em>right now.</em></h1>
+			<p class="t-small">
+				A <a href="https://nownownow.com/about" target="_blank" rel="noopener">/now</a> page
+				— last updated <time datetime={lastUpdated}>{lastUpdated}</time>.
+			</p>
+		</header>
+
+		<div class="stack" style="gap: 40px;">
+			{sections.map((s) => (
+				<section>
+					<h2 class="t-h2" style="margin-bottom: 12px;">{s.heading}</h2>
+					<ul style="display: flex; flex-direction: column; gap: 12px;">
+						{s.items.map((item) => (
+							<li class="t-body" style="position: relative; padding-left: 20px; color: var(--ink-soft);">
+								<span style="position: absolute; left: 0; top: 11px; width: 10px; height: 1px; background: var(--ink-faint);"></span>
+								{item}
+							</li>
+						))}
+					</ul>
+				</section>
+			))}
+		</div>
+
+		<footer style="margin-top: 64px; padding-top: 24px; border-top: 1px solid var(--rule); font-family: var(--font-serif); font-style: italic; color: var(--ink-soft); font-size: 15px;">
+			Inspired by Derek Sivers' <a href="https://nownownow.com/about" target="_blank" rel="noopener">/now</a> page convention.
+		</footer>
+	</article>
+</Layout>

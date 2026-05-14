@@ -19,12 +19,13 @@
 	/* Paper / ink */
 	--paper: #f6f1e7; /* warm cream */
 	--paper-deep: #efe8d8; /* slightly darker cream, for cards/quotes */
-	--ink: #161513; /* warm near-black */
-	--ink-soft: #3a3631; /* warm dark gray */
-	--ink-muted: #7a7268; /* warm mid gray */
-	--ink-faint: #b7ad9d; /* faint warm gray (numbers, captions) */
-	--rule: #d9cfb9; /* hairline */
-	--accent: #a3322f; /* deep print red, used sparingly */
+	/* All ink tokens below pass WCAG AA body text (>= 4.5:1) on --paper. */
+	--ink: #161513;       /* warm near-black, 16.2:1 (AAA) */
+	--ink-soft: #3a3631;  /* dark gray, 10.7:1 (AAA) */
+	--ink-muted: #5d5446; /* muted, 6.6:1 (AA) */
+	--ink-faint: #6e6353; /* faint — captions / metadata, 5.2:1 (AA) */
+	--rule: #d9cfb9;      /* hairline border */
+	--accent: #a3322f;    /* deep print red, used sparingly on hover */
 
 	/* Spacing (8px scale, but loose) */
 	--s-1: 4px;
@@ -381,6 +382,34 @@ section + section,
 	padding-left: var(--s-4);
 	color: var(--ink-soft);
 	font-style: italic;
+}
+
+/* Anchor links on prose headings (rehype-autolink-headings).
+   Invisible until the heading is hovered; small, muted. */
+.prose h2,
+.prose h3 {
+	position: relative;
+}
+
+.prose .anchor-link {
+	margin-left: 0.4em;
+	color: var(--ink-faint);
+	font-family: var(--font-mono);
+	font-weight: 400;
+	font-size: 0.7em;
+	opacity: 0;
+	text-decoration: none;
+	transition: opacity 120ms ease;
+}
+
+.prose h2:hover .anchor-link,
+.prose h3:hover .anchor-link,
+.prose .anchor-link:focus-visible {
+	opacity: 1;
+}
+
+.prose .anchor-link:hover {
+	color: var(--accent);
 }
 
 .prose code {
@@ -1009,5 +1038,133 @@ section + section,
 	.masthead-nav {
 		gap: var(--s-3);
 		font-size: 15px;
+	}
+}
+
+/* -----------------------------------------------------------------------
+ * Print — make /resume printable as a paper CV without losing structure
+ * --------------------------------------------------------------------- */
+@media print {
+	:root {
+		--paper: #ffffff;
+		--paper-deep: #ffffff;
+		--ink: #000000;
+		--ink-soft: #000000;
+		--ink-muted: #333333;
+		--ink-faint: #555555;
+		--rule: #cccccc;
+		--accent: #000000;
+	}
+
+	html,
+	body {
+		background: #ffffff;
+		color: #000000;
+		font-size: 11pt;
+	}
+
+	body::before,
+	.masthead,
+	.colophon {
+		display: none !important;
+	}
+
+	main {
+		padding: 0 !important;
+	}
+
+	.shell,
+	.shell-narrow,
+	.shell-wide {
+		max-width: 100%;
+		padding: 0;
+	}
+
+	a {
+		color: #000000;
+		text-decoration: none;
+	}
+
+	a[href^="http"]::after {
+		content: ' (' attr(href) ')';
+		font-size: 9pt;
+		color: #555555;
+		font-style: italic;
+	}
+
+	a[href^="mailto:"]::after,
+	a[href^="/"]::after {
+		content: '';
+	}
+
+	.page-hero {
+		margin-bottom: 12pt;
+	}
+
+	.page-hero h1 {
+		font-size: 24pt;
+		margin-bottom: 6pt;
+	}
+
+	.page-hero .lead {
+		font-size: 12pt;
+		color: #333333;
+	}
+
+	.page-hero .eyebrow,
+	.cv-row .side .period,
+	.cv-row .side .place,
+	.skills-row .group {
+		font-size: 8pt;
+		color: #555555;
+	}
+
+	.t-h2 {
+		font-size: 16pt;
+		margin-top: 12pt;
+		margin-bottom: 6pt;
+		page-break-after: avoid;
+	}
+
+	.cv-row {
+		padding: 10pt 0;
+		gap: 12pt;
+		grid-template-columns: 120px 1fr;
+		page-break-inside: avoid;
+	}
+
+	.cv-row .body .role {
+		font-size: 13pt;
+	}
+
+	.cv-row .body .where {
+		font-size: 11pt;
+	}
+
+	.cv-row .body .summary,
+	.cv-row .body .bullets li {
+		font-size: 10.5pt;
+		line-height: 1.4;
+	}
+
+	.cv-row .body .bullets {
+		margin-top: 6pt;
+	}
+
+	.cv-row .body .bullets li {
+		margin-bottom: 4pt;
+	}
+
+	.skills-grid {
+		page-break-inside: avoid;
+	}
+
+	.skills-row {
+		padding: 6pt 0;
+	}
+
+	.work-grid,
+	.work-item {
+		page-break-inside: avoid;
 	}
 }

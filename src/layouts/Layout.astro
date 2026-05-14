@@ -5,12 +5,23 @@ import { SITE, NAV, SOCIALS } from '../config';
 interface Props {
 	title?: string;
 	description?: string;
+	/** Path to the OG image relative to /public. Defaults to the site-wide one. */
+	ogImage?: string;
+	/** When set, page is treated as an Article in structured data (use on blog posts). */
+	article?: {
+		publishedTime: string;
+		modifiedTime?: string;
+		tags?: string[];
+	};
 }
 
-const { title, description = SITE.description } = Astro.props;
+const { title, description = SITE.description, ogImage, article } = Astro.props;
 const fullTitle = title ? `${title} — ${SITE.title}` : SITE.title;
 const canonical = new URL(Astro.url.pathname, Astro.site).toString();
 const currentPath = Astro.url.pathname.replace(/\/$/, '') || '/';
+const isHome = currentPath === '/';
+
+const ogImageUrl = new URL(ogImage ?? '/og/default.png', Astro.site).toString();
 
 function isCurrent(href: string): boolean {
 	const normalized = href.replace(/\/$/, '') || '/';
@@ -19,6 +30,61 @@ function isCurrent(href: string): boolean {
 }
 
 const footerSocial = SOCIALS.filter((s) => s.label !== 'rss');
+
+// JSON-LD structured data
+const personSchema = {
+	'@context': 'https://schema.org',
+	'@type': 'Person',
+	name: 'Berk Kırık',
+	url: SITE.url,
+	image: new URL('/og/default.png', Astro.site).toString(),
+	jobTitle: 'Senior AI Engineer',
+	worksFor: { '@type': 'Organization', name: 'Etiya', url: 'https://www.etiya.com/' },
+	alumniOf: [
+		{ '@type': 'CollegeOrUniversity', name: 'Ankara University' },
+		{ '@type': 'CollegeOrUniversity', name: 'Istanbul University' },
+	],
+	address: { '@type': 'PostalAddress', addressLocality: 'Ankara', addressCountry: 'TR' },
+	sameAs: [
+		'https://github.com/Berkkirik',
+		'https://www.linkedin.com/in/berkkirik/',
+		'https://orcid.org/0009-0004-5045-3048',
+	],
+	knowsAbout: [
+		'Machine learning',
+		'Large language models',
+		'Retrieval-augmented generation',
+		'Agentic AI',
+		'Kubernetes',
+		'Biomedical engineering',
+	],
+};
+
+const websiteSchema = {
+	'@context': 'https://schema.org',
+	'@type': 'WebSite',
+	url: SITE.url,
+	name: SITE.title,
+	description: SITE.description,
+	author: { '@type': 'Person', name: 'Berk Kırık' },
+	inLanguage: 'en',
+};
+
+const articleSchema = article
+	? {
+			'@context': 'https://schema.org',
+			'@type': 'Article',
+			headline: title,
+			description,
+			image: ogImageUrl,
+			datePublished: article.publishedTime,
+			...(article.modifiedTime ? { dateModified: article.modifiedTime } : {}),
+			author: { '@type': 'Person', name: 'Berk Kırık', url: SITE.url },
+			publisher: { '@type': 'Person', name: 'Berk Kırık', url: SITE.url },
+			mainEntityOfPage: { '@type': 'WebPage', '@id': canonical },
+			...(article.tags && article.tags.length > 0 ? { keywords: article.tags.join(', ') } : {}),
+		}
+	: null;
 ---
 
 <!doctype html>
@@ -36,17 +102,41 @@ const footerSocial = SOCIALS.filter((s) => s.label !== 'rss');
 		<meta name="description" content={description} />
 		<meta name="author" content={SITE.author} />
 
-		<meta property="og:type" content="website" />
+		<meta property="og:type" content={article ? 'article' : 'website'} />
 		<meta property="og:title" content={fullTitle} />
 		<meta property="og:description" content={description} />
 		<meta property="og:url" content={canonical} />
 		<meta property="og:site_name" content={SITE.title} />
+		<meta property="og:image" content={ogImageUrl} />
+		<meta property="og:image:width" content="1200" />
+		<meta property="og:image:height" content="630" />
+		<meta property="og:locale" content="en_US" />
+		{article && (
+			<>
+				<meta property="article:author" content="Berk Kırık" />
+				<meta property="article:published_time" content={article.publishedTime} />
+				{article.modifiedTime && (
+					<meta property="article:modified_time" content={article.modifiedTime} />
+				)}
+				{article.tags?.map((t) => <meta property="article:tag" content={t} />)}
+			</>
+		)}
 
-		<meta name="twitter:card" content="summary" />
+		<meta name="twitter:card" content="summary_large_image" />
 		<meta name="twitter:title" content={fullTitle} />
 		<meta name="twitter:description" content={description} />
+		<meta name="twitter:image" content={ogImageUrl} />
 
 		<meta name="theme-color" content="#f6f1e7" />
+
+		{/* JSON-LD structured data */}
+		<script is:inline type="application/ld+json" set:html={JSON.stringify(websiteSchema)} />
+		{isHome && (
+			<script is:inline type="application/ld+json" set:html={JSON.stringify(personSchema)} />
+		)}
+		{articleSchema && (
+			<script is:inline type="application/ld+json" set:html={JSON.stringify(articleSchema)} />
+		)}
 	</head>
 	<body>
 		<a class="sr-only" href="#main">Skip to content</a>

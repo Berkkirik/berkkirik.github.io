@@ -151,7 +151,16 @@ const experience: Job[] = [
 	},
 ];
 
-const education = [
+interface EducationEntry {
+	degree: string;
+	school: string;
+	period: string;
+	location: string;
+	url?: string;
+	note?: string;
+}
+
+const education: EducationEntry[] = [
 	{
 		degree: 'MSc, Computer Engineering',
 		school: 'Ankara University',
@@ -164,7 +173,6 @@ const education = [
 		period: 'Aug 2018 — May 2024',
 		location: 'Ankara, Türkiye',
 		url: 'http://bme.eng.ankara.edu.tr',
-		note: 'Foundation in signal processing, sensor systems, biological / medical data, and statistics — applied directly in later healthcare-AI and biological-classification work.',
 	},
 	{
 		degree: 'Associate, Computer Programming',
@@ -227,6 +235,17 @@ const skills: Record<string, string[]> = {
 const publications = [
 	{
 		title:
+			'Interpretable mycology: leveraging Kolmogorov–Arnold networks for high-accuracy Lactarius species classification and comparative benchmarking',
+		venue: 'Springer — The Journal of Supercomputing',
+		year: 2026,
+		authors:
+			'Berk Kırık, Güney Uğurlu, Ayhan Aydın, Fatih Ekinci, Koray Açıcı, Eda Kumru, Aras Fahrettin Korkmaz, Mustafa Sevindik, Mehmet Serdar Güzel, Ilgaz Akata',
+		summary:
+			'First author. Hybrid CNN–KAN architecture for fine-grained classification of 8 Lactarius mushroom species (1,614-image curated dataset). 98.77% accuracy / 0.9994 AUC — outperforming ConvNeXt-Small, EfficientNetV2, ResNet-50, MobileNetV3, RegNetY, SqueezeNet, and ViT-Small. Friedman + Nemenyi tests confirmed significance. LIME-based XAI showed correct predictions relied on biologically meaningful structures (gill lamellation, cap zonation, stipe–cap transitions).',
+		link: 'https://link.springer.com/article/10.1007/s11227-026-08567-6',
+	},
+	{
+		title:
 			'Enhancing crayfish sex identification with Kolmogorov-Arnold networks and stacked autoencoders',
 		venue: 'Nature — Scientific Reports',
 		year: 2025,
@@ -245,30 +264,6 @@ const publications = [
 			'Yasin Atilkan, Berk Kırık, Koray Açıcı, Recep Benzer, Fatih Ekinci, Mehmet Serdar Güzel',
 		summary:
 			'Hybrid RF-ResNet50 (ResNet50 features + Random Forest classifier) outperformed both pure deep-learning and canonical-ML models on an imbalanced dataset.',
-	},
-];
-
-const certifications = [
-	{
-		title: 'Concurrency in Go',
-		issuer: 'UC Irvine — Coursera',
-		date: 'Dec 2023',
-		link: 'https://coursera.org/verify/UZD%20D%20P5EM58E3',
-	},
-	{ title: 'Python for Data Science', issuer: 'Verified Certificate', date: 'May 2022' },
-	{ title: 'Introduction to Linux', issuer: 'Verified Certificate', date: 'May 2022' },
-	{ title: 'AI For Everyone (I & II)', issuer: 'e-Government Certificate' },
-];
-
-const languages = [
-	{ name: 'Turkish', level: 'Native' },
-	{
-		name: 'English',
-		level: 'Listening B2 · Reading C1 · Writing B2 · Speaking B2',
-	},
-	{
-		name: 'German',
-		level: 'Listening A1 · Reading A2 · Writing A2 · Speaking A1',
 	},
 ];
 
@@ -293,8 +288,7 @@ const visibleSocials = SOCIALS.filter((s) => s.label !== 'rss');
 			<p class="lead">
 				Senior AI Engineer with 5+ years building production AI in microservices —
 				LLMs, RAG, agentic AI, and the Kubernetes infrastructure underneath.
-				Background spans fintech and healthcare; trained originally as a
-				biomedical engineer.
+				Background spans fintech and healthcare.
 			</p>
 			<p style="font-family: var(--font-mono); font-size: 12px; color: var(--ink-faint); text-transform: lowercase; margin-top: 16px;">
 				Ankara, Türkiye{' '}·{' '}
@@ -400,40 +394,6 @@ const visibleSocials = SOCIALS.filter((s) => s.label !== 'rss');
 			<p style="font-family: var(--font-serif); font-style: italic; font-size: 15px; color: var(--ink-muted); margin-top: 16px;">
 				Full record on <a href="https://orcid.org/0009-0004-5045-3048" target="_blank" rel="noopener">ORCID</a>.
 			</p>
-		</section>
-
-		<!-- CERTIFICATIONS -->
-		<section id="certifications" style="margin-bottom: 80px;">
-			<h2 class="t-h2" style="margin-bottom: 24px;">Certifications</h2>
-			<div class="skills-grid">
-				{certifications.map((c) => (
-					<div class="skills-row">
-						<span class="group">{c.date ?? ''}</span>
-						<span class="items">
-							{c.link ? (
-								<a href={c.link} target="_blank" rel="noopener"><strong>{c.title}</strong></a>
-							) : (
-								<strong>{c.title}</strong>
-							)}
-							{' — '}
-							<em>{c.issuer}</em>
-						</span>
-					</div>
-				))}
-			</div>
-		</section>
-
-		<!-- LANGUAGES -->
-		<section id="languages" style="margin-bottom: 80px;">
-			<h2 class="t-h2" style="margin-bottom: 24px;">Languages</h2>
-			<div class="skills-grid">
-				{languages.map((l) => (
-					<div class="skills-row">
-						<span class="group">{l.name}</span>
-						<span class="items">{l.level}</span>
-					</div>
-				))}
-			</div>
 		</section>
 
 		<!-- INTERESTS -->

@@ -72,31 +72,58 @@ def main() -> None:
     img = Image.new("RGB", (W, H), BG)
     draw = ImageDraw.Draw(img)
 
-    # Layout: generous left margin, content stacked left-aligned
-    x = 96
+    # Optional portrait — circular, on the right side
+    portrait_path = REPO / "public" / "photo.jpg"
+    portrait_size = 280
+    portrait_x = W - portrait_size - 96
+    portrait_y = (H - portrait_size) // 2
+    text_x = 96
+
+    if portrait_path.exists():
+        portrait = Image.open(portrait_path).convert("RGB")
+        portrait = portrait.resize((portrait_size, portrait_size), Image.LANCZOS)
+        # Circular mask
+        mask = Image.new("L", (portrait_size, portrait_size), 0)
+        ImageDraw.Draw(mask).ellipse((0, 0, portrait_size, portrait_size), fill=255)
+        # Soft shadow under the portrait
+        shadow_offset = 6
+        shadow = Image.new("RGBA", img.size, (0, 0, 0, 0))
+        ImageDraw.Draw(shadow).ellipse(
+            (
+                portrait_x + shadow_offset,
+                portrait_y + shadow_offset + 4,
+                portrait_x + portrait_size + shadow_offset,
+                portrait_y + portrait_size + shadow_offset + 4,
+            ),
+            fill=(22, 21, 19, 28),
+        )
+        img.paste(shadow, (0, 0), shadow.split()[3])
+        img.paste(portrait, (portrait_x, portrait_y), mask)
+
+    # Layout: text stacked on the left
     name_y = 200
-    role_y = 360
-    tag_y = 420
+    role_y = 340
+    tag_y = 400
     rule_y = 540
     meta_y = 568
 
-    draw.text((x, name_y), "Berk Kırık", fill=INK, font=name_font)
-    draw.text((x, role_y), "Senior AI Engineer", fill=INK_SOFT, font=role_font)
+    draw.text((text_x, name_y), "Berk Kırık", fill=INK, font=name_font)
+    draw.text((text_x, role_y), "Senior AI Engineer", fill=INK_SOFT, font=role_font)
     draw.text(
-        (x, tag_y),
-        "Production AI in microservices — LLMs, RAG, agents, Kubernetes.",
+        (text_x, tag_y),
+        "Production AI in microservices —\nLLMs, RAG, agents, Kubernetes.",
         fill=INK_MUTED,
         font=body_font,
     )
 
     # Hairline above the URL row
-    draw.line([(x, rule_y), (W - x, rule_y)], fill=RULE, width=1)
+    draw.line([(text_x, rule_y), (W - text_x, rule_y)], fill=RULE, width=1)
 
-    draw.text((x, meta_y), "berkkirik.github.io", fill=INK_FAINT, font=meta_font)
+    draw.text((text_x, meta_y), "berkkirik.github.io", fill=INK_FAINT, font=meta_font)
     # Right-aligned label
-    right_label = "/ Curriculum vitae · projects · notes"
+    right_label = "/ projects · notes · cv"
     rl_w = draw.textlength(right_label, font=meta_font)
-    draw.text((W - x - rl_w, meta_y), right_label, fill=INK_FAINT, font=meta_font)
+    draw.text((W - text_x - rl_w, meta_y), right_label, fill=INK_FAINT, font=meta_font)
 
     out = REPO / "public" / "og" / "default.png"
     out.parent.mkdir(parents=True, exist_ok=True)

@@ -1,5 +1,17 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import ProjectIcon from '../components/ProjectIcon.astro';
+
+type IconName =
+	| 'rag'
+	| 'agents'
+	| 'guardrails'
+	| 'ner'
+	| 'finetune'
+	| 'swift'
+	| 'graph'
+	| 'microservices'
+	| 'healthcare';
 
 interface Project {
 	title: string;
@@ -7,6 +19,7 @@ interface Project {
 	year?: string;
 	description: string;
 	tags?: string[];
+	icon?: IconName;
 }
 
 const projects: Project[] = [
@@ -17,6 +30,7 @@ const projects: Project[] = [
 		description:
 			'Production RAG over 500K+ documents — hybrid search (vector + BM25), HyDE rewriting, cross-encoder re-ranking, RAGAS evaluation. 92% recall@10, sub-3s responses.',
 		tags: ['rag', 'llm', 'faiss', 'ragas'],
+		icon: 'rag',
 	},
 	{
 		title: 'Agentic AI Platform',
@@ -25,6 +39,7 @@ const projects: Project[] = [
 		description:
 			'Multi-agent orchestration with LangGraph + CrewAI (ReAct, Plan-and-Execute) across 25+ tools, with episodic and knowledge-graph memory, LangSmith tracing. 99.2% task completion.',
 		tags: ['agents', 'langgraph', 'crewai', 'langsmith'],
+		icon: 'agents',
 	},
 	{
 		title: 'LLM Guardrail System',
@@ -33,6 +48,7 @@ const projects: Project[] = [
 		description:
 			'Multi-layer guardrails (Guardrails AI + NeMo + custom) with PII detection, SHAP explainability, monitoring app (React / FastAPI / PostgreSQL). 89.2% blocked, 5K+ concurrent.',
 		tags: ['guardrails', 'pii', 'shap', 'redis'],
+		icon: 'guardrails',
 	},
 	{
 		title: 'Multi-Tenant NER Platform',
@@ -41,6 +57,7 @@ const projects: Project[] = [
 		description:
 			'Scalable NER serving multiple enterprise clients with tenant-specific isolation and SLA-based model selection. Sub-200ms inference.',
 		tags: ['nlp', 'ner', 'multi-tenant'],
+		icon: 'ner',
 	},
 	{
 		title: 'Code-Generation Fine-tuning',
@@ -49,6 +66,7 @@ const projects: Project[] = [
 		description:
 			'LoRA fine-tuning of large code models on Hugging Face for domain-specific completion. +40% accuracy, −90% training cost, A/B adapter swapping.',
 		tags: ['lora', 'huggingface', 'pytorch'],
+		icon: 'finetune',
 	},
 	{
 		title: 'ISO 20022 / SWIFT NLP Pipeline',
@@ -57,6 +75,7 @@ const projects: Project[] = [
 		description:
 			'NLP pipelines in Python to validate and auto-generate compliant financial messages (ISO 20022, SWIFT MT/MX) for regulated workflows.',
 		tags: ['nlp', 'fintech', 'compliance'],
+		icon: 'swift',
 	},
 	{
 		title: 'Graph-Based Fraud Detection',
@@ -65,6 +84,7 @@ const projects: Project[] = [
 		description:
 			'Graph systems on Neo4j + GraphQL over large financial datasets — link prediction, clustering, anomaly detection, with Pandas/Spark mining for real-time signals.',
 		tags: ['neo4j', 'fraud-detection', 'spark'],
+		icon: 'graph',
 	},
 	{
 		title: 'Banking-Platform Microservices',
@@ -73,6 +93,7 @@ const projects: Project[] = [
 		description:
 			'Cloud-native banking platform: Golang for performance-critical services, Python / Django for AI orchestration. gRPC + REST, KrakenD gateway, Keycloak RBAC/ABAC, custom Kubernetes operators.',
 		tags: ['golang', 'kubernetes', 'krakend'],
+		icon: 'microservices',
 	},
 	{
 		title: 'Healthcare Activity Recognition',
@@ -81,6 +102,7 @@ const projects: Project[] = [
 		description:
 			'Edge-to-cloud sensor-fusion pipeline (ESP-32 + Raspberry Pi). PCA / FFT / LDA preprocessing, ensemble of classical ML + CNN models, on-device mobile inference.',
 		tags: ['edge-ml', 'sensor-fusion', 'cnn'],
+		icon: 'healthcare',
 	},
 ];
 ---
@@ -110,7 +132,10 @@ const projects: Project[] = [
 							{p.attribution && <span class="dot">·</span>}
 							{p.attribution && <span>{p.attribution}</span>}
 						</div>
-						<h3>{p.title}</h3>
+						<h3>
+							{p.icon && <ProjectIcon name={p.icon} />}
+							<span>{p.title}</span>
+						</h3>
 						<p>{p.description}</p>
 						{p.tags && p.tags.length > 0 && (
 							<div class="tags">

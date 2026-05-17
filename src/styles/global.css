@@ -26,6 +26,7 @@
 	--ink-faint: #6e6353; /* faint — captions / metadata, 5.2:1 (AA) */
 	--rule: #d9cfb9;      /* hairline border */
 	--accent: #a3322f;    /* deep print red, used sparingly on hover */
+	--accent-2: #2e4a6a;  /* fountain-pen ink blue, decorative second accent */
 
 	/* Spacing (8px scale, but loose) */
 	--s-1: 4px;
@@ -391,11 +392,98 @@ section + section,
 	color: var(--ink-faint);
 }
 
+/* Drop cap on the first paragraph of a post.
+   Only applies when the first paragraph follows the prose root directly
+   (i.e. real lede), and only above 600px so it doesn't dominate phones. */
+.prose > p:first-of-type::first-letter {
+	font-family: var(--font-serif);
+	font-weight: 500;
+	font-style: normal;
+	color: var(--accent-2);
+	float: left;
+	font-size: 4.2em;
+	line-height: 0.92;
+	padding: 4px 10px 0 0;
+	margin-top: 6px;
+}
+
+@media (max-width: 600px) {
+	.prose > p:first-of-type::first-letter {
+		float: none;
+		font-size: inherit;
+		color: inherit;
+		padding: 0;
+		margin: 0;
+	}
+}
+
+/* Pull-quote treatment for blockquotes — slightly bigger, hanging quote
+   mark in the fountain-pen-ink color, italic Newsreader. */
 .prose blockquote {
-	border-left: 2px solid var(--rule);
-	padding-left: var(--s-4);
+	border-left: none;
+	padding: 0 0 0 var(--s-8);
+	position: relative;
 	color: var(--ink-soft);
 	font-style: italic;
+	font-size: 1.08em;
+	line-height: 1.55;
+	margin-block: var(--s-8);
+}
+
+.prose blockquote::before {
+	content: '“';
+	position: absolute;
+	left: 0;
+	top: -0.12em;
+	font-family: var(--font-serif);
+	font-style: normal;
+	font-size: 3.2em;
+	line-height: 1;
+	color: var(--accent-2);
+}
+
+/* Decorative section divider — used as <hr> in markdown or between H2's.
+   Renders a centered three-dot dingbat with hairlines on each side. */
+.prose hr,
+.prose .ornament {
+	border: 0;
+	margin: var(--s-10) auto;
+	height: 1px;
+	width: 60%;
+	max-width: 280px;
+	color: var(--accent-2);
+	background: transparent;
+	position: relative;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.prose hr::before,
+.prose .ornament::before {
+	content: '· · ·';
+	display: inline-block;
+	padding: 0 12px;
+	background: var(--paper);
+	color: var(--accent-2);
+	font-family: var(--font-serif);
+	font-size: 14px;
+	letter-spacing: 0.4em;
+	line-height: 1;
+	position: relative;
+	z-index: 1;
+}
+
+.prose hr::after,
+.prose .ornament::after {
+	content: '';
+	position: absolute;
+	left: 0;
+	right: 0;
+	top: 50%;
+	height: 1px;
+	background: var(--rule);
+	z-index: 0;
 }
 
 /* Anchor links on prose headings (rehype-autolink-headings).
@@ -451,6 +539,63 @@ section + section,
 	background: transparent;
 	border: 0;
 	padding: 0;
+}
+
+/* -----------------------------------------------------------------------
+ * Reading-progress bar
+ *   Lives at top of viewport on blog posts. Scroll-driven via animation-
+ *   timeline where supported; static (invisible) elsewhere — no JS needed.
+ * --------------------------------------------------------------------- */
+.reading-progress {
+	position: fixed;
+	top: 0;
+	left: 0;
+	height: 2px;
+	width: 100%;
+	background: transparent;
+	z-index: 100;
+	pointer-events: none;
+}
+
+.reading-progress > span {
+	display: block;
+	height: 100%;
+	width: 100%;
+	background: linear-gradient(
+		to right,
+		var(--accent-2) 0%,
+		var(--accent) 100%
+	);
+	transform-origin: 0 50%;
+	transform: scaleX(0);
+}
+
+@supports (animation-timeline: scroll()) {
+	.reading-progress > span {
+		animation: progress-fill linear both;
+		animation-timeline: scroll(root);
+	}
+	@keyframes progress-fill {
+		to { transform: scaleX(1); }
+	}
+}
+
+/* -----------------------------------------------------------------------
+ * Hero motif — small line-art SVG above blog posts.
+ *   Kept restrained: max 200px tall, single-color stroke in --accent-2.
+ * --------------------------------------------------------------------- */
+.hero-motif {
+	display: flex;
+	justify-content: center;
+	margin: 0 auto var(--s-10);
+	color: var(--accent-2);
+}
+
+.hero-motif svg {
+	max-width: 280px;
+	height: auto;
+	stroke: currentColor;
+	fill: none;
 }
 
 /* -----------------------------------------------------------------------
@@ -687,6 +832,29 @@ section + section,
 	line-height: 1.25;
 	letter-spacing: -0.005em;
 	color: var(--ink);
+	display: flex;
+	align-items: center;
+	gap: var(--s-3);
+}
+
+.work-item .project-icon {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	flex-shrink: 0;
+	width: 28px;
+	height: 28px;
+	color: var(--accent-2);
+}
+
+.work-item .project-icon svg {
+	width: 100%;
+	height: 100%;
+	stroke: currentColor;
+	fill: none;
+	stroke-width: 1.4;
+	stroke-linecap: round;
+	stroke-linejoin: round;
 }
 
 .work-item p {

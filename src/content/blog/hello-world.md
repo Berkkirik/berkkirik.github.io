@@ -3,6 +3,7 @@ title: "Hello, world"
 description: "What this blog is for and what to expect."
 pubDate: 2026-05-13
 tags: ["meta", "intro"]
+heroMotif: intro
 ---
 
 This is the first post on the new site. The plan: short, honest notes on

@@ -10,6 +10,8 @@ const blog = defineCollection({
 		updatedDate: z.coerce.date().optional(),
 		tags: z.array(z.string()).default([]),
 		draft: z.boolean().default(false),
+		/** Optional hero motif rendered above the post (see HeroMotif.astro). */
+		heroMotif: z.enum(['intro', 'recursion', 'stack']).optional(),
 	}),
 });
 

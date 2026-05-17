@@ -3,6 +3,7 @@ title: "Running Recursive Language Models in production"
 description: "Notes from wiring rlm behind a real coding agent: REPL contract holes, the REPL-vs-tool-calling paradigm mismatch, and the mode flag we ended up adding."
 pubDate: 2026-05-17
 tags: ["rlm", "agents", "llms", "production"]
+heroMotif: recursion
 ---
 
 [Recursive Language Models](https://arxiv.org/abs/2512.24601) (RLMs) replace

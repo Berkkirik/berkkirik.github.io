@@ -1,5 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import HeroMotif from '../../components/HeroMotif.astro';
 import { getCollection, render } from 'astro:content';
 import type { CollectionEntry } from 'astro:content';
 
@@ -38,6 +39,9 @@ const readingMinutes = Math.max(1, Math.round(wordCount / 225));
 		tags: post.data.tags,
 	}}
 >
+	{/* Scroll-driven reading progress bar — pure CSS via animation-timeline. */}
+	<div class="reading-progress" aria-hidden="true"><span></span></div>
+
 	<article class="shell">
 		<header style="margin-bottom: 48px;">
 			<p style="font-family: var(--font-mono); font-size: 12px; color: var(--ink-faint); text-transform: lowercase; margin-bottom: 12px;">
@@ -58,6 +62,10 @@ const readingMinutes = Math.max(1, Math.round(wordCount / 225));
 				<p class="t-lead">{post.data.description}</p>
 			)}
 		</header>
+
+		{post.data.heroMotif && (
+			<HeroMotif name={post.data.heroMotif} label={`Decorative motif for ${post.data.title}`} />
+		)}
 
 		<div class="prose">
 			<Content />

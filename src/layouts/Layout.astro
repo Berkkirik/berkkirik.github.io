@@ -13,9 +13,11 @@ interface Props {
 		modifiedTime?: string;
 		tags?: string[];
 	};
+	/** When true, emits noindex and omits the canonical tag. Use on 404 and similar. */
+	noindex?: boolean;
 }
 
-const { title, description = SITE.description, ogImage, article } = Astro.props;
+const { title, description = SITE.description, ogImage, article, noindex = false } = Astro.props;
 const fullTitle = title ? `${title} — ${SITE.title}` : SITE.title;
 const canonical = new URL(Astro.url.pathname, Astro.site).toString();
 const currentPath = Astro.url.pathname.replace(/\/$/, '') || '/';
@@ -36,27 +38,30 @@ const personSchema = {
 	'@context': 'https://schema.org',
 	'@type': 'Person',
 	name: 'Berk Kırık',
-	url: SITE.url,
-	image: new URL('/og/default.png', Astro.site).toString(),
+	givenName: 'Berk',
+	familyName: 'Kırık',
 	jobTitle: 'Senior AI Engineer',
+	description: SITE.description,
+	url: SITE.url,
+	image: new URL('/photo.jpg', Astro.site).toString(),
+	email: 'mailto:berk.kirik@outlook.com',
 	worksFor: { '@type': 'Organization', name: 'Etiya', url: 'https://www.etiya.com/' },
 	alumniOf: [
-		{ '@type': 'CollegeOrUniversity', name: 'Ankara University' },
-		{ '@type': 'CollegeOrUniversity', name: 'Istanbul University' },
+		{ '@type': 'CollegeOrUniversity', name: 'Ankara University', url: 'https://www.ankara.edu.tr/' },
 	],
 	address: { '@type': 'PostalAddress', addressLocality: 'Ankara', addressCountry: 'TR' },
-	sameAs: [
-		'https://github.com/Berkkirik',
-		'https://www.linkedin.com/in/berkkirik/',
-		'https://orcid.org/0009-0004-5045-3048',
-	],
 	knowsAbout: [
-		'Machine learning',
-		'Large language models',
-		'Retrieval-augmented generation',
+		'Large Language Models',
+		'Retrieval-Augmented Generation',
+		'Named Entity Recognition',
 		'Agentic AI',
 		'Kubernetes',
-		'Biomedical engineering',
+		'Machine Learning',
+	],
+	sameAs: [
+		'https://www.linkedin.com/in/berkkirik/',
+		'https://github.com/Berkkirik',
+		'https://orcid.org/0009-0004-5045-3048',
 	],
 };
 
@@ -94,7 +99,8 @@ const articleSchema = article
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<meta name="generator" content={Astro.generator} />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="canonical" href={canonical} />
+		{!noindex && <link rel="canonical" href={canonical} />}
+		{noindex && <meta name="robots" content="noindex, follow" />}
 		<link rel="alternate" type="application/rss+xml" title={`${SITE.title} — Blog`} href="/rss.xml" />
 		<link rel="sitemap" href="/sitemap-index.xml" />
 

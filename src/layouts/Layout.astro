@@ -133,7 +133,21 @@ const articleSchema = article
 		<meta name="twitter:description" content={description} />
 		<meta name="twitter:image" content={ogImageUrl} />
 
-		<meta name="theme-color" content="#f6f1e7" />
+		<meta name="theme-color" media="(prefers-color-scheme: light)" content="#f6f1e7" />
+		<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#1a1714" />
+
+		{/* Pre-paint theme init — reads saved preference and sets data-theme
+		    on <html> BEFORE first paint to avoid a flash of wrong theme. */}
+		<script is:inline>
+			(function () {
+				try {
+					var saved = localStorage.getItem('theme');
+					if (saved === 'light' || saved === 'dark') {
+						document.documentElement.setAttribute('data-theme', saved);
+					}
+				} catch (e) {}
+			})();
+		</script>
 
 		{/* JSON-LD structured data */}
 		<script is:inline type="application/ld+json" set:html={JSON.stringify(websiteSchema)} />
@@ -161,6 +175,16 @@ const articleSchema = article
 							aria-current={isCurrent(item.href) ? 'page' : undefined}
 						>{item.label}</a>
 					))}
+					<button
+						class="theme-toggle"
+						type="button"
+						data-theme-toggle
+						aria-label="Toggle dark mode"
+						title="Toggle dark mode"
+					>
+						<span class="theme-toggle-icon theme-toggle-icon-light" aria-hidden="true">☾</span>
+						<span class="theme-toggle-icon theme-toggle-icon-dark" aria-hidden="true">☀</span>
+					</button>
 				</nav>
 			</div>
 		</header>
@@ -193,5 +217,35 @@ const articleSchema = article
 				</div>
 			</div>
 		</footer>
+
+		{/* Theme-toggle handler — picks the opposite of whatever is currently
+		    showing, persists to localStorage, and keeps the aria-label honest. */}
+		<script is:inline>
+			(function () {
+				var btn = document.querySelector('[data-theme-toggle]');
+				if (!btn) return;
+				function current() {
+					var attr = document.documentElement.getAttribute('data-theme');
+					if (attr === 'light' || attr === 'dark') return attr;
+					return window.matchMedia('(prefers-color-scheme: dark)').matches
+						? 'dark'
+						: 'light';
+				}
+				function apply(next) {
+					document.documentElement.setAttribute('data-theme', next);
+					try {
+						localStorage.setItem('theme', next);
+					} catch (e) {}
+					btn.setAttribute(
+						'aria-label',
+						next === 'dark' ? 'Switch to light theme' : 'Switch to dark theme'
+					);
+				}
+				apply(current());
+				btn.addEventListener('click', function () {
+					apply(current() === 'dark' ? 'light' : 'dark');
+				});
+			})();
+		</script>
 	</body>
 </html>

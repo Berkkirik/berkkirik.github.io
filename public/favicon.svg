@@ -1,20 +1,26 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
-	<rect width="32" height="32" rx="4" fill="#f6f1e7"/>
+	<style>
+		.bg { fill: #f6f1e7; }
+		.cell { fill: #161513; }
+		.cell-outline { stroke: #161513; }
+		@media (prefers-color-scheme: dark) {
+			.bg { fill: #1a1714; }
+			.cell { fill: #f0e9d6; }
+			.cell-outline { stroke: #f0e9d6; }
+		}
+	</style>
+	<rect class="bg" width="32" height="32" rx="4"/>
 	<!-- Attention matrix: 4x4 grid with varying fill (lower-triangular,
 	     evoking the causal-attention mask of a transformer). -->
-	<g fill="#161513">
-		<!-- row 0 -->
+	<g class="cell">
 		<rect x="7" y="7" width="4" height="4" rx="0.6"/>
-		<!-- row 1 -->
 		<rect x="7" y="13" width="4" height="4" rx="0.6" opacity="0.55"/>
 		<rect x="13" y="13" width="4" height="4" rx="0.6"/>
-		<!-- row 2 -->
 		<rect x="7" y="19" width="4" height="4" rx="0.6" opacity="0.25"/>
 		<rect x="13" y="19" width="4" height="4" rx="0.6" opacity="0.55"/>
 		<rect x="19" y="19" width="4" height="4" rx="0.6"/>
-		<!-- row 3: dim outline cells suggesting more cells exist -->
 	</g>
-	<g fill="none" stroke="#161513" stroke-width="1" opacity="0.4">
+	<g class="cell-outline" fill="none" stroke-width="1" opacity="0.4">
 		<rect x="7" y="25" width="4" height="4" rx="0.6"/>
 		<rect x="13" y="25" width="4" height="4" rx="0.6"/>
 		<rect x="19" y="25" width="4" height="4" rx="0.6"/>

@@ -43,52 +43,7 @@
 	--s-24: 96px;
 	--s-32: 128px;
 
-	/* Ruled-paper lines (overridden in dark mode) */
-	--rule-paper: rgba(150, 130, 100, 0.13);
-
-	/* Soft drop shadow (overridden in dark mode) */
-	--shadow-soft: rgba(22, 21, 19, 0.07);
-
 	color-scheme: light;
-}
-
-/* -----------------------------------------------------------------------
- * Dark mode tokens
- *   Apply when (a) user has explicitly chosen dark via [data-theme="dark"],
- *   or (b) no explicit choice + system prefers dark.
- *   "Warm editorial dark" — preserves the cream/ink hue relationship but
- *   inverts the lightness scale. Not a pure colour invert.
- * --------------------------------------------------------------------- */
-:root[data-theme='dark'] {
-	--paper: #1a1714;       /* warm near-black, walnut */
-	--paper-deep: #22201c;  /* slightly elevated card/quote surface */
-	--ink: #f0e9d6;         /* warm off-white, AAA on paper */
-	--ink-soft: #d2caba;    /* AAA */
-	--ink-muted: #a39884;   /* AAA */
-	--ink-faint: #847a66;   /* AA */
-	--rule: #3a342b;        /* hairline, just visible */
-	--accent: #e09593;      /* lightened print red for dark */
-	--accent-2: #9ab3d4;    /* lightened pen-blue for dark */
-	--rule-paper: rgba(220, 210, 190, 0.06);
-	--shadow-soft: rgba(0, 0, 0, 0.4);
-	color-scheme: dark;
-}
-
-@media (prefers-color-scheme: dark) {
-	:root:not([data-theme]) {
-		--paper: #1a1714;
-		--paper-deep: #22201c;
-		--ink: #f0e9d6;
-		--ink-soft: #d2caba;
-		--ink-muted: #a39884;
-		--ink-faint: #847a66;
-		--rule: #3a342b;
-		--accent: #e09593;
-		--accent-2: #9ab3d4;
-		--rule-paper: rgba(220, 210, 190, 0.06);
-		--shadow-soft: rgba(0, 0, 0, 0.4);
-		color-scheme: dark;
-	}
 }
 
 /* -----------------------------------------------------------------------
@@ -124,8 +79,8 @@ body {
 		to bottom,
 		transparent 0,
 		transparent 27px,
-		var(--rule-paper) 27px,
-		var(--rule-paper) 28px
+		rgba(150, 130, 100, 0.13) 27px,
+		rgba(150, 130, 100, 0.13) 28px
 	);
 }
 
@@ -249,56 +204,6 @@ main {
 .masthead-nav a:hover,
 .masthead-nav a[aria-current='page'] {
 	color: var(--ink);
-}
-
-/* Theme toggle — sits inline with the nav links, looks like a typographic
-   character (☾ / ☀) rather than a chrome control. */
-.theme-toggle {
-	display: inline-flex;
-	align-items: center;
-	justify-content: center;
-	padding: 0;
-	margin: 0;
-	width: 1.4em;
-	height: 1.4em;
-	color: var(--ink-soft);
-	font-size: 18px;
-	line-height: 1;
-	border-radius: 3px;
-	transition: color 0.15s ease;
-}
-
-.theme-toggle:hover,
-.theme-toggle:focus-visible {
-	color: var(--ink);
-}
-
-.theme-toggle:focus-visible {
-	outline: 1px dotted var(--ink-faint);
-	outline-offset: 2px;
-}
-
-/* Icon swap — show moon in light mode, sun in dark mode.
-   Default (no [data-theme] set) follows system preference. */
-.theme-toggle-icon-dark {
-	display: none;
-}
-
-:root[data-theme='dark'] .theme-toggle-icon-light {
-	display: none;
-}
-
-:root[data-theme='dark'] .theme-toggle-icon-dark {
-	display: inline;
-}
-
-@media (prefers-color-scheme: dark) {
-	:root:not([data-theme]) .theme-toggle-icon-light {
-		display: none;
-	}
-	:root:not([data-theme]) .theme-toggle-icon-dark {
-		display: inline;
-	}
 }
 
 /* -----------------------------------------------------------------------
@@ -1280,7 +1185,7 @@ section + section,
 	border-radius: 50%;
 	object-fit: cover;
 	border: 1px solid var(--rule);
-	box-shadow: 0 2px 14px var(--shadow-soft);
+	box-shadow: 0 2px 14px rgba(22, 21, 19, 0.07);
 	display: block;
 }
 

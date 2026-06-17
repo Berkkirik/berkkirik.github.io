@@ -24,7 +24,7 @@ const experience: Job[] = [
 			{
 				heading: 'Code-Generation Fine-tuning',
 				body:
-					'Used LoRA on Hugging Face to fine-tune large code models, boosting domain-specific code-completion accuracy by 40% while cutting training cost by 90%. Only 0.1% of model parameters needed tuning, with A/B testing for seamless adapter swapping.',
+					'Used PEFT/LoRA (Unsloth) on Hugging Face to fine-tune large code models, boosting domain-specific code-completion accuracy by 40% while cutting training cost by 90%. Only 0.1% of model parameters needed tuning, with A/B testing for seamless adapter swapping.',
 			},
 			{
 				heading: 'Multi-Tenant NER System',
@@ -39,12 +39,12 @@ const experience: Job[] = [
 			{
 				heading: 'Enterprise RAG System',
 				body:
-					'Production pipeline processing 500K+ documents with hybrid search (vector + BM25), advanced chunking, HyDE query rewriting, cross-encoder re-ranking, and RAGAS evaluation. 92% recall@10, 45% reduced hallucinations, sub-3s responses, 20+ file formats.',
+					'Production pipeline processing 500K+ documents with hybrid search (Qdrant + BM25), advanced chunking, HyDE query rewriting, cross-encoder re-ranking, LlamaIndex orchestration, vLLM serving, and RAGAS evaluation. 92% recall@10, 45% reduced hallucinations, sub-3s responses, 20+ file formats.',
 			},
 			{
 				heading: 'Agentic AI Development',
 				body:
-					'Multi-agent orchestration with LangGraph / CrewAI (ReAct + Plan-and-Execute) across 25+ tools. Autonomous code-review agents, multi-agent collaboration (researcher / analyst / writer / critic), episodic + knowledge-graph memory, LangSmith tracing, self-healing pipelines at 99.2% task completion, guardrail integration.',
+					'Multi-agent orchestration with LangGraph / CrewAI (ReAct + Plan-and-Execute) across 25+ MCP tools. Autonomous code-review agents, multi-agent collaboration (researcher / analyst / writer / critic), episodic + knowledge-graph memory, DSPy-optimized prompts, LangSmith tracing, self-healing pipelines at 99.2% task completion, guardrail integration.',
 			},
 		],
 	},
@@ -73,19 +73,19 @@ const experience: Job[] = [
 					'Graph-based systems on Neo4j + GraphQL — link prediction, clustering, anomaly detection — combined with Pandas / Spark mining for real-time signals over large financial datasets.',
 			},
 			{
-				heading: 'Backend Platform Engineering (Golang + Python)',
+				heading: 'Backend Platform Engineering (Go + Python)',
 				body:
-					'Designed and led a cloud-native banking platform: Golang for performance-critical services, Python / Django for AI orchestration. Globally distributed Agile teams.',
+					'Designed and led a cloud-native banking platform: Go (Gin / Echo / Fiber) for performance-critical services, Python / Django for AI orchestration. Globally distributed Agile teams.',
 			},
 			{
 				heading: 'Microservices Architecture with gRPC & REST',
 				body:
-					'Production microservices (Golang + Python). gRPC for internal, REST for external. KrakenD as API gateway, Keycloak for RBAC + ABAC.',
+					'Production microservices (Go + Python). gRPC for internal, REST for external. Kong + KrakenD as API gateways, Keycloak for RBAC + ABAC.',
 			},
 			{
 				heading: 'Kubernetes Infrastructure & DevOps Automation',
 				body:
-					'Kubernetes-native infrastructure with custom Golang operators / controllers for dynamic orchestration and autoscaling. Shell scripts, cron jobs, GitOps-driven CI/CD pipelines.',
+					'Kubernetes-native infrastructure with custom Go operators / controllers for dynamic orchestration and autoscaling. Shell scripts, cron jobs, GitOps-driven CI/CD pipelines.',
 			},
 			{
 				heading: 'Agile Team Leadership',
@@ -184,26 +184,49 @@ const education: EducationEntry[] = [
 ];
 
 const skills: Record<string, string[]> = {
-	'Programming languages': ['Python', 'Go', 'C++', 'PHP', 'SQL'],
+	'Programming languages': ['Python', 'Go', 'Rust', 'C++', 'JavaScript', 'SQL'],
+	'Frontend / web': ['React', 'Next.js', 'Vue.js'],
 	'ML / Deep Learning': [
 		'PyTorch',
 		'TensorFlow',
 		'Keras',
 		'JAX / Flax',
 		'Hugging Face',
-		'LoRA',
+		'PEFT / LoRA',
+		'Unsloth',
 		'XGBoost',
 	],
 	'LLM / agentic systems': [
 		'LangGraph',
+		'DeepAgents',
+		'OpenCode',
 		'CrewAI',
+		'MCP',
+		'DSPy',
 		'LangSmith',
-		'RAG (FAISS, BM25, HyDE)',
+	],
+	'RAG & LLM ops': [
+		'LlamaIndex',
+		'RAG (FAISS, Qdrant, BM25, HyDE)',
 		'RAGAS',
+		'vLLM',
+		'Ollama',
 		'Guardrails AI',
 		'NeMo Guardrails',
 	],
-	'Backend & APIs': ['FastAPI', 'Django', 'Flask', 'Node.js', 'gRPC', 'REST', 'KrakenD'],
+	'Backend & APIs': [
+		'FastAPI',
+		'Django',
+		'Flask',
+		'Gin',
+		'Echo',
+		'Fiber',
+		'Node.js',
+		'gRPC',
+		'REST',
+		'Kong',
+		'KrakenD',
+	],
 	'Data & graphs': [
 		'PostgreSQL',
 		'Oracle',
